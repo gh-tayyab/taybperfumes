@@ -50,7 +50,13 @@ function CheckoutContent() {
   const [step, setStep] = useState<"form" | "processing">("form");
 
   const [form, setForm] = useState<FormState>({
-    name: "", email: "", phone: "", address: "", city: "", postalCode: "", notes: "",
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    postalCode: "",
+    notes: "",
   });
 
   useEffect(() => {
@@ -89,8 +95,33 @@ function CheckoutContent() {
   };
 
   // ── COD handler ────────────────────────────────────────────
+  // ── COD handler ────────────────────────────────────────────
   const handleCOD = async (orderId: string) => {
+    // Save order to DB / API
+    await fetch("/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        orderId,
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        address: form.address,
+        city: form.city,
+        postalCode: form.postalCode,
+        notes: form.notes,
+        items,
+        total: grandTotal,
+        paymentStatus: "Pending",
+        paymentMethod: "Cash on Delivery",
+      }),
+    });
+
+    // Existing email flow
     await sendEmails(orderId, "Pending — Cash on Delivery");
+
     clearCart();
     router.push(`/order-success?order_id=${orderId}`);
   };
@@ -107,7 +138,10 @@ function CheckoutContent() {
     try {
       await handleCOD(orderId);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      const msg =
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again.";
       setError(msg);
       setStep("form");
     } finally {
@@ -137,10 +171,11 @@ function CheckoutContent() {
   return (
     <div className="pt-[100px] min-h-screen">
       <div className="max-w-7xl mx-auto px-6 py-12">
-
         {/* Header */}
         <div className="mb-12">
-          <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">Secure Checkout</p>
+          <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">
+            Secure Checkout
+          </p>
           <h1 className="font-display text-5xl text-cream italic flex items-center gap-4">
             Checkout
             <ShieldCheck size={28} className="text-gold opacity-60" />
@@ -151,7 +186,9 @@ function CheckoutContent() {
         {(cancelled || paymentFailed) && (
           <div className="flex items-start gap-3 border border-red-500/30 bg-red-500/5 p-4 mb-8 text-red-400 text-sm">
             <AlertCircle size={16} className="shrink-0 mt-0.5" />
-            <span>Something went wrong with your previous order. Please try again.</span>
+            <span>
+              Something went wrong with your previous order. Please try again.
+            </span>
           </div>
         )}
 
@@ -163,18 +200,15 @@ function CheckoutContent() {
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-
           {/* ── FORM ─────────────────────────────────────────── */}
           <div className="lg:col-span-3">
             <form onSubmit={handleSubmit} className="space-y-8">
-
               {/* Delivery Details */}
               <div>
                 <h2 className="font-body text-xs tracking-widest uppercase text-gold mb-5 pb-3 border-b border-gold/20">
                   Delivery Information
                 </h2>
                 <div className="space-y-4">
-
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <FormField
                       label="Full Name"
@@ -234,7 +268,9 @@ function CheckoutContent() {
                   <div>
                     <label className="block text-xs tracking-widest uppercase text-cream/30 mb-2">
                       Order Notes{" "}
-                      <span className="normal-case text-cream/20">(optional)</span>
+                      <span className="normal-case text-cream/20">
+                        (optional)
+                      </span>
                     </label>
                     <textarea
                       rows={3}
@@ -257,13 +293,16 @@ function CheckoutContent() {
                   <Truck size={20} className="text-gold mt-0.5 shrink-0" />
                   <div>
                     <div className="flex items-center gap-2">
-                      <p className="text-gold text-sm font-medium">Cash on Delivery</p>
+                      <p className="text-gold text-sm font-medium">
+                        Cash on Delivery
+                      </p>
                       <span className="text-[10px] bg-gold/20 text-gold px-2 py-0.5 tracking-wider">
                         Only Option
                       </span>
                     </div>
                     <p className="text-cream/40 text-xs mt-1">
-                      Pay when your order arrives at your doorstep. No card needed.
+                      Pay when your order arrives at your doorstep. No card
+                      needed.
                     </p>
                   </div>
                 </div>
@@ -323,7 +362,9 @@ function CheckoutContent() {
                       <p className="font-display text-sm text-cream leading-tight truncate">
                         {item.product.name}
                       </p>
-                      <p className="text-cream/30 text-xs mt-0.5">{item.product.size}</p>
+                      <p className="text-cream/30 text-xs mt-0.5">
+                        {item.product.size}
+                      </p>
                     </div>
                     <p className="text-gold text-sm shrink-0 font-medium">
                       {formatPrice(item.product.price * item.quantity)}
@@ -354,13 +395,17 @@ function CheckoutContent() {
               {totalPrice < 3000 && (
                 <div className="mt-4">
                   <div className="flex justify-between text-xs text-cream/30 mb-1.5">
-                    <span>Add {formatPrice(3000 - totalPrice)} for free shipping</span>
+                    <span>
+                      Add {formatPrice(3000 - totalPrice)} for free shipping
+                    </span>
                     <span>{Math.round((totalPrice / 3000) * 100)}%</span>
                   </div>
                   <div className="h-[2px] bg-gold/10 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-gold transition-all duration-500"
-                      style={{ width: `${Math.min((totalPrice / 3000) * 100, 100)}%` }}
+                      style={{
+                        width: `${Math.min((totalPrice / 3000) * 100, 100)}%`,
+                      }}
                     />
                   </div>
                 </div>
@@ -374,7 +419,10 @@ function CheckoutContent() {
                   { icon: "↩️", text: "7-day return on unopened items" },
                   { icon: "💬", text: "WhatsApp confirmation after order" },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-cream/30">
+                  <div
+                    key={i}
+                    className="flex items-center gap-2 text-xs text-cream/30"
+                  >
                     <span>{item.icon}</span>
                     <span>{item.text}</span>
                   </div>
@@ -392,7 +440,13 @@ function CheckoutContent() {
 // Sub-component
 // ─────────────────────────────────────────────────────────────
 function FormField({
-  label, type, placeholder, value, onChange, required, hint,
+  label,
+  type,
+  placeholder,
+  value,
+  onChange,
+  required,
+  hint,
 }: {
   label: string;
   type: string;
