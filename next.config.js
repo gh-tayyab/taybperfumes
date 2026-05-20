@@ -8,7 +8,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "TAYBperfumes.com",
+        hostname: "taybperfumes.com",
       },
     ],
   },

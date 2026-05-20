@@ -9,7 +9,7 @@ const bundles = products.filter((p) => p.category === "bundle");
 
 export default function HomePage() {
   return (
-    <div className="pt-[100px]">
+    <div className="relative">
       {/* ── HERO ── */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
@@ -71,7 +71,7 @@ export default function HomePage() {
       {/* ── TRUST BADGES ── */}
       <section className="border-y border-gold/10 py-6">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 justify-items-center gap-6">
             {[
               { icon: <Sparkles size={18} />, label: "Long-Lasting 12+ Hours" },
               { icon: <Shield size={18} />, label: "100% Authentic" },

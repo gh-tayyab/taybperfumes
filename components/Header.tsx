@@ -14,28 +14,45 @@ const navLinks = [
 
 export default function Header() {
   const { totalItems, openCart } = useCart();
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 60);
+    };
+
     window.addEventListener("scroll", onScroll);
+
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const showBackground = scrolled || hovered;
 
   return (
     <>
       <header
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "top-0 bg-charcoal/95 backdrop-blur-md shadow-lg shadow-black/30"
-            : "top-[36px] bg-charcoal"
+          scrolled ? "top-0" : "top-[36px]"
+        } ${
+          showBackground
+            ? "bg-charcoal/95 backdrop-blur-md shadow-lg shadow-black/30"
+            : "bg-transparent"
         }`}
       >
-        <div className="h-[1px] bg-gold/30 w-full" />
+        {/* Top line */}
+        <div
+          className={`h-[1px] w-full transition-all duration-500 ${
+            showBackground ? "bg-gold/30" : "bg-transparent"
+          }`}
+        />
 
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-start relative">
-          {/* Mobile menu */}
+          {/* Mobile Menu */}
           <button
             onClick={() => setMobileOpen(true)}
             className="md:hidden text-cream/80 hover:text-gold transition-colors"
@@ -43,7 +60,7 @@ export default function Header() {
             <Menu size={22} />
           </button>
 
-          {/* Desktop nav LEFT */}
+          {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-10 ml-8">
             {navLinks.map((link) => (
               <Link
@@ -56,7 +73,7 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Logo center */}
+          {/* Logo */}
           <Link
             href="/"
             className="absolute left-1/2 -translate-x-1/2 font-display text-2xl md:text-3xl tracking-[0.2em] text-cream hover:text-gold-light transition-colors duration-300"
@@ -64,7 +81,7 @@ export default function Header() {
             TAYB
           </Link>
 
-          {/* Icons RIGHT */}
+          {/* Icons */}
           <div className="flex items-center gap-5 ml-auto">
             <button className="text-cream/70 hover:text-gold transition-colors hidden md:flex">
               <Search size={18} />
@@ -79,6 +96,7 @@ export default function Header() {
               className="relative text-cream/70 hover:text-gold transition-colors"
             >
               <ShoppingBag size={20} />
+
               {totalItems > 0 && (
                 <span className="absolute -top-2 -right-2 bg-gold text-charcoal text-[10px] font-medium w-4.5 h-4.5 min-w-[18px] min-h-[18px] rounded-full flex items-center justify-center">
                   {totalItems}
@@ -88,7 +106,12 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="h-[1px] bg-gold/20 w-full" />
+        {/* Bottom line */}
+        <div
+          className={`h-[1px] w-full transition-all duration-500 ${
+            showBackground ? "bg-gold/20" : "bg-transparent"
+          }`}
+        />
       </header>
 
       {/* Mobile Drawer */}
@@ -97,6 +120,7 @@ export default function Header() {
           mobileOpen ? "visible" : "invisible"
         }`}
       >
+        {/* Overlay */}
         <div
           className={`absolute inset-0 bg-black/70 transition-opacity duration-500 ${
             mobileOpen ? "opacity-100" : "opacity-0"
@@ -104,6 +128,7 @@ export default function Header() {
           onClick={() => setMobileOpen(false)}
         />
 
+        {/* Drawer */}
         <div
           className={`absolute left-0 top-0 bottom-0 w-72 bg-charcoal-light border-r border-gold/20 transition-transform duration-500 ${
             mobileOpen ? "translate-x-0" : "-translate-x-full"
