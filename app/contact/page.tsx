@@ -7,9 +7,25 @@ export default function ContactPage() {
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+  
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+  
+      if (res.ok) {
+        setSent(true);
+        setForm({ name: "", email: "", message: "" });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -132,7 +148,8 @@ export default function ContactPage() {
               </p>
               <div className="flex gap-4">
                 <a
-                  href="#"
+                  href="https://www.instagram.com/taybperfumes/"
+                  target="_blank"
                   className="border border-gold/20 text-cream/40 hover:border-gold hover:text-gold transition-all p-3"
                 >
                   <Instagram size={16} />
