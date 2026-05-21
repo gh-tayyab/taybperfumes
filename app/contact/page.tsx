@@ -155,7 +155,8 @@ export default function ContactPage() {
                   <Instagram size={16} />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/taybperfumes"
+                  target="_blank"
                   className="border border-gold/20 text-cream/40 hover:border-gold hover:text-gold transition-all p-3"
                 >
                   <Facebook size={16} />

@@ -84,25 +84,22 @@ export default function Footer() {
 
             <div className="flex gap-4 mt-6">
               <a
-                href="#"
+                href="https://facebook.com/taybperfumes"
+                target="_blank"
                 className="text-cream/30 hover:text-gold transition-colors"
               >
                 <Facebook size={18} />
               </a>
 
               <a
-                href="#"
+                href="https://instagram.com/taybperfumes"
+                target="_blank"
                 className="text-cream/30 hover:text-gold transition-colors"
               >
                 <Instagram size={18} />
               </a>
 
-              <a
-                href="#"
-                className="text-cream/30 hover:text-gold transition-colors"
-              >
-                <Youtube size={18} />
-              </a>
+              
             </div>
           </div>
 
