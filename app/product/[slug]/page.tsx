@@ -54,7 +54,7 @@ export default function ProductPage({ params }: Props) {
   ];
 
   return (
-    <div className="pt-[100px] min-h-screen">
+    <div className="pt-[52px] min-h-screen">
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center gap-2 text-xs text-cream/30 tracking-wider">

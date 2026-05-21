@@ -1,12 +1,57 @@
+import type { Metadata } from "next";
 import { products } from "@/lib/data";
 import ProductCard from "@/components/ProductCard";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Men's Luxury Perfumes Pakistan | TAYB Perfumes",
+  description:
+    "Shop premium long-lasting men's fragrances by TAYB Perfumes in Pakistan. Bold, commanding luxury scents crafted for men who leave an impression.",
+  keywords: [
+    "men perfumes pakistan",
+    "luxury perfumes for men",
+    "best men's fragrances pakistan",
+    "long lasting perfume for men",
+    "tayb perfumes men",
+    "premium men's scent",
+    "designer perfume pakistan",
+  ],
+  openGraph: {
+    title: "Men's Luxury Perfumes Pakistan | TAYB Perfumes",
+    description:
+      "Discover premium men’s fragrances by TAYB Perfumes. Bold, luxurious and crafted to last all day.",
+    url: "https://taybperfumes.com/men",
+    siteName: "TAYB Perfumes",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1541643600914-78b084683702?w=1800&q=80",
+        width: 1800,
+        height: 1200,
+        alt: "TAYB Men's Luxury Perfumes",
+      },
+    ],
+    locale: "en_PK",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Men's Luxury Perfumes | TAYB Perfumes",
+    description:
+      "Explore bold and premium long-lasting fragrances for men by TAYB Perfumes.",
+    images: [
+      "https://images.unsplash.com/photo-1541643600914-78b084683702?w=1800&q=80",
+    ],
+  },
+  alternates: {
+    canonical: "https://taybperfumes.com/men",
+  },
+};
 
 const menProducts = products.filter((p) => p.category === "men");
 
 export default function MenPage() {
   return (
-    <div className="pt-[100px]">
+    <div className="pt-[52px]">
       {/* Hero */}
       <section className="relative h-[50vh] overflow-hidden">
         <Image

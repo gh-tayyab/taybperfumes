@@ -11,10 +11,20 @@ export default function AnnouncementBar() {
   const doubled = [...messages, ...messages];
 
   return (
-    <div className="bg-gold text-charcoal text-xs font-body font-medium tracking-widest uppercase py-2.5 overflow-hidden">
-      <div className="flex whitespace-nowrap animate-marquee">
+    <div
+      role="region"
+      aria-label="Store announcements"
+      className="bg-gold text-charcoal text-xs font-body font-medium tracking-widest uppercase py-2.5 overflow-hidden"
+    >
+      <div
+        className="flex whitespace-nowrap animate-marquee"
+        aria-live="polite"
+      >
         {doubled.map((msg, i) => (
-          <span key={i} className="mx-12 shrink-0">
+          <span
+            key={i}
+            className="mx-12 shrink-0"
+          >
             {msg}
           </span>
         ))}

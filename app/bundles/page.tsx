@@ -1,16 +1,61 @@
+import type { Metadata } from "next";
 import { products } from "@/lib/data";
 import ProductCard from "@/components/ProductCard";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Luxury Perfume Bundles Pakistan | TAYB Perfumes",
+  description:
+    "Shop TAYB Perfumes luxury fragrance bundles in Pakistan. Save 10% on premium long-lasting perfume bundles for men and women.",
+  keywords: [
+    "perfume bundles pakistan",
+    "luxury perfume bundle",
+    "tayb perfumes",
+    "fragrance gift set pakistan",
+    "men perfume bundle",
+    "women perfume bundle",
+    "best perfume deals pakistan",
+  ],
+  openGraph: {
+    title: "Luxury Perfume Bundles Pakistan | TAYB Perfumes",
+    description:
+      "Discover TAYB signature perfume bundles. Premium long-lasting fragrances with exclusive savings across Pakistan.",
+    url: "https://taybperfumes.com/bundles",
+    siteName: "TAYB Perfumes",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=1800&q=80",
+        width: 1800,
+        height: 1200,
+        alt: "TAYB Perfume Bundles",
+      },
+    ],
+    locale: "en_PK",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Luxury Perfume Bundles Pakistan | TAYB Perfumes",
+    description:
+      "Shop premium TAYB fragrance bundles and save 10% on long-lasting luxury perfumes.",
+    images: [
+      "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=1800&q=80",
+    ],
+  },
+  alternates: {
+    canonical: "https://taybperfumes.com/bundles",
+  },
+};
 
 const bundleProducts = products.filter((p) => p.category === "bundle");
 
 export default function BundlesPage() {
   return (
-    <div className="pt-[100px]">
+    <div className="pt-[52px]">
       <section className="relative h-[50vh] overflow-hidden">
         <Image
           src="https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=1800&q=80"
-          alt="Bundles"
+          alt="Luxury perfume bundles by TAYB Perfumes in Pakistan"
           fill
           className="object-cover"
           priority

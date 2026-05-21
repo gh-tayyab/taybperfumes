@@ -169,7 +169,7 @@ function CheckoutContent() {
   }
 
   return (
-    <div className="pt-[100px] min-h-screen">
+    <div className="pt-[52px] min-h-screen">
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Header */}
         <div className="mb-12">

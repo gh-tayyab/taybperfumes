@@ -1,8 +1,54 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { products, reviews, formatPrice } from "@/lib/data";
+import { products, reviews } from "@/lib/data";
 import ProductCard from "@/components/ProductCard";
 import { Star, Shield, Truck, RefreshCw, Sparkles } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "TAYB Perfumes Pakistan | Luxury Long-Lasting Fragrances",
+  description:
+    "Discover TAYB Perfumes — premium long-lasting luxury fragrances in Pakistan. Shop signature perfumes for men & women with nationwide delivery.",
+  keywords: [
+    "TAYB Perfumes",
+    "Luxury Perfumes Pakistan",
+    "Best Perfumes Pakistan",
+    "Long Lasting Perfume",
+    "Perfume for Men",
+    "Perfume for Women",
+    "Pakistani Fragrance Brand",
+    "Luxury Fragrances",
+  ],
+  openGraph: {
+    title: "TAYB Perfumes Pakistan",
+    description:
+      "Luxury long-lasting perfumes crafted for bold individuality. Shop premium fragrances for men and women.",
+    url: "https://taybperfumes.com",
+    siteName: "TAYB Perfumes",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=1800&q=80",
+        width: 1800,
+        height: 1200,
+        alt: "TAYB Perfumes Hero",
+      },
+    ],
+    locale: "en_PK",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TAYB Perfumes Pakistan",
+    description:
+      "Premium luxury perfumes for men & women in Pakistan.",
+    images: [
+      "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=1800&q=80",
+    ],
+  },
+  alternates: {
+    canonical: "https://taybperfumes.com",
+  },
+};
 
 const featuredProducts = products.slice(0, 4);
 const bundles = products.filter((p) => p.category === "bundle");
@@ -25,7 +71,6 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
           <div className="max-w-2xl">
-            {/* Eye-catching tag */}
             <div className="flex items-center gap-2 mb-6 fade-in-up fade-in-up-delay-1">
               <div className="h-[1px] w-10 bg-gold" />
               <span className="font-body text-xs tracking-[0.3em] uppercase text-gold">
@@ -61,7 +106,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Scroll hint */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
           <span className="text-xs tracking-widest uppercase text-cream">Scroll</span>
           <div className="w-[1px] h-12 bg-gradient-to-b from-cream to-transparent animate-pulse" />
@@ -80,7 +124,9 @@ export default function HomePage() {
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 text-cream/50">
                 <span className="text-gold">{item.icon}</span>
-                <span className="font-body text-xs tracking-wider uppercase">{item.label}</span>
+                <span className="font-body text-xs tracking-wider uppercase">
+                  {item.label}
+                </span>
               </div>
             ))}
           </div>
@@ -91,7 +137,9 @@ export default function HomePage() {
       <section className="py-20 max-w-7xl mx-auto px-6">
         <div className="flex items-end justify-between mb-12">
           <div>
-            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">Explore</p>
+            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">
+              Explore
+            </p>
             <h2 className="font-display text-4xl md:text-5xl text-cream">
               Shop All
             </h2>
@@ -121,7 +169,9 @@ export default function HomePage() {
         />
         <div className="absolute inset-0 bg-charcoal/60" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4">Limited Offer</p>
+          <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4">
+            Limited Offer
+          </p>
           <h2 className="font-display text-5xl md:text-7xl text-cream mb-4 italic">
             Bundle & Save 10%
           </h2>
@@ -141,7 +191,9 @@ export default function HomePage() {
       <section className="py-4 max-w-7xl mx-auto px-6 mb-20">
         <div className="flex items-end justify-between mb-12">
           <div>
-            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">Save More</p>
+            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">
+              Save More
+            </p>
             <h2 className="font-display text-4xl md:text-5xl text-cream">
               Bundles
             </h2>
@@ -160,7 +212,8 @@ export default function HomePage() {
           {
             label: "For Her",
             name: "Angelica",
-            desc: "Delicate florals, soft musk, warm sandalwood. A scent that lingers like a beautiful memory.",
+            desc:
+              "Delicate florals, soft musk, warm sandalwood. A scent that lingers like a beautiful memory.",
             href: "/women",
             img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&q=80",
             cta: "Shop Women",
@@ -168,7 +221,8 @@ export default function HomePage() {
           {
             label: "For Him",
             name: "Laceda",
-            desc: "Bold cedarwood, rich amber, clean musk. A commanding presence in every room.",
+            desc:
+              "Bold cedarwood, rich amber, clean musk. A commanding presence in every room.",
             href: "/men",
             img: "https://images.unsplash.com/photo-1541643600914-78b084683702?w=800&q=80",
             cta: "Shop Men",
@@ -183,9 +237,15 @@ export default function HomePage() {
             />
             <div className="absolute inset-0 bg-charcoal/60 group-hover:bg-charcoal/50 transition-colors duration-500" />
             <div className="absolute inset-0 flex flex-col justify-end p-10">
-              <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">{item.label}</p>
-              <h3 className="font-display text-5xl text-cream italic mb-3">{item.name}</h3>
-              <p className="text-cream/50 text-sm mb-6 max-w-xs">{item.desc}</p>
+              <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">
+                {item.label}
+              </p>
+              <h3 className="font-display text-5xl text-cream italic mb-3">
+                {item.name}
+              </h3>
+              <p className="text-cream/50 text-sm mb-6 max-w-xs">
+                {item.desc}
+              </p>
               <Link
                 href={item.href}
                 className="self-start border border-cream/40 text-cream font-body text-xs tracking-widest uppercase px-6 py-3 hover:bg-gold hover:border-gold hover:text-charcoal transition-all duration-300"
@@ -201,7 +261,9 @@ export default function HomePage() {
       <section className="py-20 bg-[#0f0f0f]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
-            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">Testimonials</p>
+            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">
+              Testimonials
+            </p>
             <h2 className="font-display text-4xl md:text-5xl text-cream">
               Happy Customers
             </h2>
@@ -215,11 +277,7 @@ export default function HomePage() {
               >
                 <div className="flex gap-1 mb-4">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      size={12}
-                      className="fill-gold text-gold"
-                    />
+                    <Star key={i} size={12} className="fill-gold text-gold" />
                   ))}
                 </div>
                 <p className="font-display italic text-lg text-cream/80 leading-relaxed mb-4">
@@ -229,7 +287,9 @@ export default function HomePage() {
                   <span>{review.name}</span>
                   <span>{review.location}</span>
                 </div>
-                <p className="text-gold/50 text-xs mt-1 tracking-wider">{review.product}</p>
+                <p className="text-gold/50 text-xs mt-1 tracking-wider">
+                  {review.product}
+                </p>
               </div>
             ))}
           </div>
@@ -247,39 +307,17 @@ export default function HomePage() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent" />
             </div>
           </div>
 
           <div>
-            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-4">Our Story</p>
+            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-4">
+              Our Story
+            </p>
             <h2 className="font-display text-4xl md:text-5xl text-cream mb-6 leading-tight">
               Founder&apos;s
               <em className="block text-gold">Vision</em>
             </h2>
-            <blockquote className="font-display italic text-xl text-cream/70 leading-relaxed mb-8 border-l-2 border-gold pl-6">
-              &ldquo;Built from scratch with bold blends and clean ingredients
-              that truly last. Every fragrance is a story: Personal, powerful,
-              and unlike anything else.&rdquo;
-            </blockquote>
-
-            <div className="grid grid-cols-2 gap-6">
-              {[
-                { label: "Trusted by Thousands", value: "10K+" },
-                { label: "Long-Lasting Hours", value: "12+" },
-                { label: "Unique Fragrances", value: "2" },
-                { label: "Cities Delivered", value: "50+" },
-              ].map((stat) => (
-                <div key={stat.label} className="border border-gold/20 p-4">
-                  <p className="font-display text-3xl text-gold mb-1">
-                    {stat.value}
-                  </p>
-                  <p className="text-cream/40 text-xs tracking-wider uppercase">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>

@@ -6,12 +6,61 @@ import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import AnnouncementBar from "@/components/AnnouncementBar";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_APP_URL || "https://taybperfumes.com";
+
 export const metadata: Metadata = {
-  title: "TAYB Perfumes – Premium Long-Lasting Fragrances",
+  metadataBase: new URL(siteUrl),
+
+  title: {
+    default: "TAYB Perfumes – Premium Long-Lasting Fragrances",
+    template: "%s | TAYB Perfumes",
+  },
+
   description:
-    "Shop TAYB — Pakistan's finest long-lasting luxury perfumes & fragrances for men & women. Discover your signature scent today.",
-  keywords:
-    "perfumes, fragrances, Pakistan, luxury, long-lasting, men perfume, women perfume",
+    "Shop TAYB luxury perfumes in Pakistan. Long-lasting premium fragrances for men & women.",
+
+  keywords: [
+    "tayb perfumes",
+    "perfumes pakistan",
+    "luxury fragrance",
+    "attar",
+    "men perfume",
+    "women perfume",
+  ],
+
+  alternates: {
+    canonical: siteUrl,
+  },
+
+  openGraph: {
+    title: "TAYB Perfumes",
+    description:
+      "Premium long-lasting luxury fragrances in Pakistan.",
+    url: siteUrl,
+    siteName: "TAYB Perfumes",
+    locale: "en_PK",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "TAYB Perfumes",
+    description: "Luxury perfumes in Pakistan",
+    images: ["/og-image.jpg"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -20,13 +69,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en-PK">
       <body className="grain bg-charcoal text-cream font-body">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only"
+        >
+          Skip to content
+        </a>
+
         <CartProvider>
           <AnnouncementBar />
           <Header />
           <CartDrawer />
-          <main>{children}</main>
+
+          <main id="main-content">{children}</main>
+
           <Footer />
         </CartProvider>
       </body>

@@ -1,9 +1,45 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | TAYB Perfumes Pakistan",
+  description:
+    "Read TAYB Perfumes privacy policy. Learn how we collect, use, and protect your personal information while shopping luxury fragrances online in Pakistan.",
+  keywords: [
+    "TAYB privacy policy",
+    "privacy policy Pakistan perfume store",
+    "TAYB perfumes data protection",
+    "luxury fragrance privacy",
+    "secure perfume shopping Pakistan",
+  ],
+  openGraph: {
+    title: "Privacy Policy | TAYB Perfumes",
+    description:
+      "Understand how TAYB Perfumes protects your personal data and privacy while shopping online.",
+    url: "https://taybperfumes.com/privacy",
+    siteName: "TAYB Perfumes",
+    locale: "en_PK",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://taybperfumes.com/privacy",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
 export default function PrivacyPage() {
   return (
-    <div className="pt-[100px] min-h-screen">
+    <div className="pt-[52px] min-h-screen">
       <div className="max-w-3xl mx-auto px-6 py-20">
-        <p className="text-gold text-xs tracking-[0.3em] uppercase mb-3">Legal</p>
-        <h1 className="font-display text-5xl text-cream italic mb-12">Privacy Policy</h1>
+        <p className="text-gold text-xs tracking-[0.3em] uppercase mb-3">
+          Legal
+        </p>
+
+        <h1 className="font-display text-5xl text-cream italic mb-12">
+          Privacy Policy
+        </h1>
 
         <div className="space-y-8 text-cream/50 text-sm leading-relaxed">
           {[
@@ -28,8 +64,13 @@ export default function PrivacyPage() {
               body: "For any privacy-related queries, please contact us at hello@TAYBperfumes.com. We will respond within 5 business days.",
             },
           ].map((section) => (
-            <div key={section.title} className="border-b border-gold/10 pb-8">
-              <h2 className="font-display text-2xl text-cream mb-3">{section.title}</h2>
+            <div
+              key={section.title}
+              className="border-b border-gold/10 pb-8"
+            >
+              <h2 className="font-display text-2xl text-cream mb-3">
+                {section.title}
+              </h2>
               <p>{section.body}</p>
             </div>
           ))}
