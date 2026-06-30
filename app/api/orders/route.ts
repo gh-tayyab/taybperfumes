@@ -14,26 +14,26 @@ export async function POST(req: Request) {
     ).create([
       {
         fields: {
-            OrderId: body.orderId,
-            CustomerName: body.name,
-            Email: body.email,
-            Phone: body.phone,
-            Address: body.address,
-            City: body.city,
-            PostalCode: body.postalCode,
-            Notes: body.notes,
-            Products: body.items
+          CustomerName: body.name,
+          Email: body.email,
+          Phone: body.phone,
+          Address: body.address,
+          City: body.city,
+          PostalCode: body.postalCode,
+          Notes: body.notes,
+          Products: body.items
             .map((item: any) => `${item.product.name} x${item.quantity}`)
             .join(", "),
-            Total: body.total,
-            Status: "New Order",
-            PaymentStatus: "Pending",
-          }
+          Total: body.total,
+          Status: "New Order",
+          PaymentStatus: "Pending",
+        }
       },
     ]);
 
     return NextResponse.json({
       success: true,
+      orderId: record[0].fields.OrderId,
       record,
     });
   } catch (error: any) {

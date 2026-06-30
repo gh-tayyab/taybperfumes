@@ -11,7 +11,6 @@ import {
   initEmailJS,
   sendOwnerOrderEmail,
   sendCustomerConfirmationEmail,
-  generateOrderId,
   formatOrderItemsForEmail,
 } from "@/lib/emailjs";
 import { Suspense } from "react";
@@ -95,16 +94,14 @@ function CheckoutContent() {
   };
 
   // ── COD handler ────────────────────────────────────────────
-  // ── COD handler ────────────────────────────────────────────
-  const handleCOD = async (orderId: string) => {
-    // Save order to DB / API
-    await fetch("/api/orders", {
+  const handleCOD = async () => {
+    // Save order
+    const res = await fetch("/api/orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        orderId,
         name: form.name,
         email: form.email,
         phone: form.phone,
@@ -118,37 +115,46 @@ function CheckoutContent() {
         paymentMethod: "Cash on Delivery",
       }),
     });
-
-    // Existing email flow
+  
+    const data = await res.json();
+  
+    if (!res.ok) {
+      throw new Error(data.error || "Order failed");
+    }
+  
+    // Airtable ka generated OrderId
+    const orderId = data.orderId;
+  
+    // Emails
     await sendEmails(orderId, "Pending — Cash on Delivery");
-
+  
     clearCart();
+  
     router.push(`/order-success?order_id=${orderId}`);
   };
 
   // ── Main submit ────────────────────────────────────────────
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+  
     setError(null);
     setLoading(true);
     setStep("processing");
-
-    const orderId = generateOrderId();
-
+  
     try {
-      await handleCOD(orderId);
+      await handleCOD();
     } catch (err: unknown) {
       const msg =
         err instanceof Error
           ? err.message
           : "Something went wrong. Please try again.";
+  
       setError(msg);
       setStep("form");
     } finally {
       setLoading(false);
     }
   };
-
   // ── Empty cart ─────────────────────────────────────────────
   if (items.length === 0 && step !== "processing") {
     return (
