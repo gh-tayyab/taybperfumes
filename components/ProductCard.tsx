@@ -61,7 +61,6 @@ export default function ProductCard({ product }: Props) {
             {product.name}
           </h3>
         </Link>
-        <p className="text-cream/40 text-xs mt-1 tracking-wider">{product.scent}</p>
         <div className="flex items-center gap-2 mt-2">
           <span className="text-gold font-medium text-sm">{formatPrice(product.price)}</span>
           {product.originalPrice && (
