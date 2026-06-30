@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ShoppingBag, Search, Menu, X, User } from "lucide-react";
+import { ShoppingBag, Menu, X } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { useCart } from "@/lib/cart-context";
 import { usePathname } from "next/navigation";
 
@@ -86,25 +87,20 @@ export default function Header() {
           <Link
             href="/"
             aria-label="TAYB Home"
-            className="absolute left-1/2 -translate-x-1/2 font-display text-2xl md:text-3xl tracking-[0.2em] text-cream hover:text-gold-light transition-colors duration-300"
+            className="absolute left-1/2 -translate-x-1/2 font-display text-2xl md:text-3xl tracking-[0.2em] text-gold hover:text-gold-light transition-colors duration-300"
           >
             TAYB
           </Link>
 
           <div className="flex items-center gap-5 ml-auto">
-            <button
-              aria-label="Search products"
-              className="text-cream/70 hover:text-gold transition-colors hidden md:flex"
-            >
-              <Search size={18} />
-            </button>
-
-            <button
-              aria-label="User account"
-              className="text-cream/70 hover:text-gold transition-colors hidden md:flex"
-            >
-              <User size={18} />
-            </button>
+          <Link
+    href="https://wa.me/923367189237"
+    target="_blank"
+    aria-label="Chat on WhatsApp"
+    className="text-cream/70 hover:text-green-500 transition-colors hidden md:flex"
+  >
+    <FaWhatsapp size={22} />
+  </Link>
 
             <button
               aria-label="Open cart"

@@ -109,7 +109,7 @@ export default function Footer() {
               aria-label="Social media links"
             >
               <a
-                href="https://facebook.com/taybperfumes"
+                href="https://www.facebook.com/profile.php?id=61591221246286"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit TAYB Facebook page"

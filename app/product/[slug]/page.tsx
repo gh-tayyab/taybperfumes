@@ -111,7 +111,6 @@ export default function ProductPage({ params }: Props) {
 
           {/* Info */}
           <div>
-            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">{product.scent}</p>
             <h1 className="font-display text-4xl md:text-5xl text-cream mb-4">{product.name}</h1>
 
             {/* Stars */}

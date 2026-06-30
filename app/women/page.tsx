@@ -40,7 +40,7 @@ export default function WomenPage() {
       {/* Hero */}
       <section className="relative h-[50vh] overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=1800&q=80"
+          src="/womenhero.png"
           alt="Women's Fragrances"
           fill
           className="object-cover"

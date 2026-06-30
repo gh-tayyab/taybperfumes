@@ -31,7 +31,9 @@ body {
   font-weight: 300;
   overflow-x: hidden;
 }
-
+.swiper-wrapper {
+  transition-timing-function: linear !important;
+}
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

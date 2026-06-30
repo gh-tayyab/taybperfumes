@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
@@ -5,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import AnnouncementBar from "@/components/AnnouncementBar";
+import FloatingSocial from "@/components/FloatingSocial";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_APP_URL || "https://taybperfumes.com";
@@ -84,7 +86,7 @@ export default function RootLayout({
           <CartDrawer />
 
           <main id="main-content">{children}</main>
-
+          <FloatingSocial />
           <Footer />
         </CartProvider>
       </body>

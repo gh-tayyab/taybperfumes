@@ -7,9 +7,12 @@ export interface Product {
   price: number;
   originalPrice?: number;
   size: string;
-  category: "men" | "women" | "bundle" | "gift-set";
-  scent: string;
-  notes: { top: string[]; heart: string[]; base: string[] };
+  category: "men" | "women" | "bundle";
+  notes: {
+    top: string[];
+    heart: string[];
+    base: string[];
+  };
   description: string;
   longDescription: string;
   image: string;
@@ -27,7 +30,6 @@ export const products: Product[] = [
     price: 4999,
     size: "50ml",
     category: "men",
-    scent: "Woody Amber",
     notes: {
       top: ["Bergamot", "Black Pepper", "Pink Grapefruit"],
       heart: ["Cedarwood", "Vetiver", "Patchouli"],
@@ -37,9 +39,9 @@ export const products: Product[] = [
     longDescription:
       "Laceda is a statement of confidence — a deep, resonant woody amber that opens with the fresh brightness of bergamot and settles into a rich, lasting base of sandalwood and amber. Crafted for those who leave an impression long after they've left the room.",
     image:
-      "https://images.unsplash.com/photo-1541643600914-78b084683702?w=600&q=80",
+      "/perfume.png",
     hoverImage:
-      "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=600&q=80",
+      "/botel.jpg",
     badge: "New",
     inStock: true,
   },
@@ -50,7 +52,6 @@ export const products: Product[] = [
     price: 4999,
     size: "50ml",
     category: "women",
-    scent: "Floral Musk",
     notes: {
       top: ["Jasmine", "Rose", "Peach"],
       heart: ["Lily", "Iris", "Violet"],
@@ -60,9 +61,9 @@ export const products: Product[] = [
     longDescription:
       "Angelica captures the essence of bloom — a graceful interplay of white florals and warm musk. Jasmine and rose unfurl at the top, while lily and iris bloom at the heart. A whisper of vanilla and white musk grounds this ethereal fragrance in something deeply sensual.",
     image:
-      "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&q=80",
+      "/womenperfume.png",
     hoverImage:
-      "https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=600&q=80",
+      "/botel.jpg",
     badge: "New",
     inStock: true,
   },
@@ -73,7 +74,6 @@ export const products: Product[] = [
     price: 999,
     size: "10ml",
     category: "men",
-    scent: "Woody Amber",
     notes: {
       top: ["Bergamot", "Black Pepper", "Pink Grapefruit"],
       heart: ["Cedarwood", "Vetiver", "Patchouli"],
@@ -83,9 +83,9 @@ export const products: Product[] = [
     longDescription:
       "All the presence of Laceda in a convenient 10ml travel size. Perfect for those who want to carry their signature scent wherever the day takes them.",
     image:
-      "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&q=80",
+      "/perfume.png",
     hoverImage:
-      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80",
+      "/botel.jpg",
     inStock: true,
   },
   {
@@ -95,7 +95,6 @@ export const products: Product[] = [
     price: 7999,
     size: "100ml",
     category: "men",
-    scent: "Woody Amber",
     notes: {
       top: ["Bergamot", "Black Pepper", "Pink Grapefruit"],
       heart: ["Cedarwood", "Vetiver", "Patchouli"],
@@ -105,9 +104,9 @@ export const products: Product[] = [
     longDescription:
       "For those who've made Laceda their signature — the 100ml bottle ensures you'll never run out of the scent that defines you.",
     image:
-      "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80",
+      "/perfume.png",
     hoverImage:
-      "https://images.unsplash.com/photo-1541643600914-78b084683702?w=600&q=80",
+      "/botel.jpg",
     inStock: true,
   },
   {
@@ -117,7 +116,6 @@ export const products: Product[] = [
     price: 999,
     size: "10ml",
     category: "women",
-    scent: "Floral Musk",
     notes: {
       top: ["Jasmine", "Rose", "Peach"],
       heart: ["Lily", "Iris", "Violet"],
@@ -127,9 +125,9 @@ export const products: Product[] = [
     longDescription:
       "Carry the delicate magic of Angelica in your pocket. The 10ml travel size is perfect for touch-ups and on-the-go elegance.",
     image:
-      "https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=600&q=80",
+      "/womenperfume.png",
     hoverImage:
-      "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&q=80",
+      "/botel.jpg",
     inStock: true,
   },
   {
@@ -139,7 +137,6 @@ export const products: Product[] = [
     price: 7999,
     size: "100ml",
     category: "women",
-    scent: "Floral Musk",
     notes: {
       top: ["Jasmine", "Rose", "Peach"],
       heart: ["Lily", "Iris", "Violet"],
@@ -149,9 +146,9 @@ export const products: Product[] = [
     longDescription:
       "Angelica in its full splendour. The 100ml bottle is for those who've found their signature and want to wear it every single day.",
     image:
-      "https://images.unsplash.com/photo-1519638399535-1b036603ac77?w=600&q=80",
+      "/womenperfume.png",
     hoverImage:
-      "https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=600&q=80",
+      "/botel.jpg",
     inStock: true,
   },
   {
@@ -163,7 +160,6 @@ export const products: Product[] = [
     discount: 10,
     size: "2 × 50ml",
     category: "bundle",
-    scent: "Floral & Woody",
     notes: {
       top: ["Bergamot", "Jasmine", "Rose"],
       heart: ["Cedarwood", "Lily", "Iris"],
@@ -173,9 +169,9 @@ export const products: Product[] = [
     longDescription:
       "The ultimate TAYB duo. Laceda's commanding woods paired with Angelica's ethereal florals. A complete fragrance wardrobe in one elegant box. Save 10% when you choose both.",
     image:
-      "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=600&q=80",
+      "/bundles.png",
     hoverImage:
-      "https://images.unsplash.com/photo-1541643600914-78b084683702?w=600&q=80",
+      "/botel.jpg",
     badge: "Save 10%",
     inStock: true,
   },
@@ -188,7 +184,6 @@ export const products: Product[] = [
     discount: 10,
     size: "2 × 10ml",
     category: "bundle",
-    scent: "Floral & Woody",
     notes: {
       top: ["Bergamot", "Jasmine", "Rose"],
       heart: ["Cedarwood", "Lily", "Iris"],
@@ -198,20 +193,19 @@ export const products: Product[] = [
     longDescription:
       "New to TAYB? Start with both. The 10ml bundle lets you explore our two signature scents and discover which one (or both) belong in your daily ritual.",
     image:
-      "https://images.unsplash.com/photo-1590156562745-5d69e2f6ef38?w=600&q=80",
+      "/bundleperfume.png",
     hoverImage:
-      "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=600&q=80",
+      "/botel.jpg",
     badge: "Save 10%",
     inStock: true,
   },
   {
     id: "9",
-    name: "TAYB Luxury Gift Set",
-    slug: "luxury-gift-set",
-    price: 12999,
+    name: "Bundle – Angelica & Laceda 50ml",
+    slug: "bundle-angelica-laceda-50ml",
+    price: 8999,
     size: "Full Collection",
-    category: "gift-set",
-    scent: "Floral & Woody",
+    category: "bundle",
     notes: {
       top: ["Bergamot", "Jasmine", "Peach"],
       heart: ["Cedarwood", "Lily", "Iris"],

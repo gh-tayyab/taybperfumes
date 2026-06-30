@@ -54,7 +54,7 @@ export default function BundlesPage() {
     <div className="pt-[52px]">
       <section className="relative h-[50vh] overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=1800&q=80"
+          src="/bundlehero.png"
           alt="Luxury perfume bundles by TAYB Perfumes in Pakistan"
           fill
           className="object-cover"

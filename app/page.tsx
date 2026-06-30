@@ -4,6 +4,7 @@ import Link from "next/link";
 import { products, reviews } from "@/lib/data";
 import ProductCard from "@/components/ProductCard";
 import { Star, Shield, Truck, RefreshCw, Sparkles } from "lucide-react";
+import ProductSlider from "@/components/ProductSlider";
 
 export const metadata: Metadata = {
   title: "TAYB Perfumes Pakistan | Luxury Long-Lasting Fragrances",
@@ -39,8 +40,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "TAYB Perfumes Pakistan",
-    description:
-      "Premium luxury perfumes for men & women in Pakistan.",
+    description: "Premium luxury perfumes for men & women in Pakistan.",
     images: [
       "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=1800&q=80",
     ],
@@ -60,7 +60,7 @@ export default function HomePage() {
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=1800&q=80"
+            src="/bundleperfume.png"
             alt="TAYB Perfumes Hero"
             fill
             className="object-cover"
@@ -107,7 +107,9 @@ export default function HomePage() {
         </div>
 
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-          <span className="text-xs tracking-widest uppercase text-cream">Scroll</span>
+          <span className="text-xs tracking-widest uppercase text-cream">
+            Scroll
+          </span>
           <div className="w-[1px] h-12 bg-gradient-to-b from-cream to-transparent animate-pulse" />
         </div>
       </section>
@@ -144,25 +146,15 @@ export default function HomePage() {
               Shop All
             </h2>
           </div>
-          <Link
-            href="/collections"
-            className="hidden md:flex items-center gap-2 text-xs tracking-widest uppercase text-cream/40 hover:text-gold transition-colors"
-          >
-            View All <span>→</span>
-          </Link>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <ProductSlider products={products} />
       </section>
 
       {/* ── MID BANNER ── */}
       <section className="relative h-[60vh] overflow-hidden mx-6 mb-20">
         <Image
-          src="https://images.unsplash.com/photo-1590156562745-5d69e2f6ef38?w=1800&q=80"
+          src="/hero.png"
           alt="TAYB Bundles"
           fill
           className="object-cover"
@@ -187,7 +179,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── BUNDLES ── */}
+      {/* ── BUNDLES ──
       <section className="py-4 max-w-7xl mx-auto px-6 mb-20">
         <div className="flex items-end justify-between mb-12">
           <div>
@@ -204,7 +196,7 @@ export default function HomePage() {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* ── SIGNATURE SPLIT SECTION ── */}
       <section className="grid grid-cols-1 md:grid-cols-2 mb-20">
@@ -212,23 +204,24 @@ export default function HomePage() {
           {
             label: "For Her",
             name: "Angelica",
-            desc:
-              "Delicate florals, soft musk, warm sandalwood. A scent that lingers like a beautiful memory.",
+            desc: "Delicate florals, soft musk, warm sandalwood. A scent that lingers like a beautiful memory.",
             href: "/women",
-            img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&q=80",
+            img: "/womenperfume.png",
             cta: "Shop Women",
           },
           {
             label: "For Him",
             name: "Laceda",
-            desc:
-              "Bold cedarwood, rich amber, clean musk. A commanding presence in every room.",
+            desc: "Bold cedarwood, rich amber, clean musk. A commanding presence in every room.",
             href: "/men",
-            img: "https://images.unsplash.com/photo-1541643600914-78b084683702?w=800&q=80",
+            img: "/perfume.png",
             cta: "Shop Men",
           },
         ].map((item) => (
-          <div key={item.name} className="relative h-[70vh] overflow-hidden group">
+          <div
+            key={item.name}
+            className="relative h-[70vh] overflow-hidden group"
+          >
             <Image
               src={item.img}
               alt={item.name}
@@ -243,9 +236,7 @@ export default function HomePage() {
               <h3 className="font-display text-5xl text-cream italic mb-3">
                 {item.name}
               </h3>
-              <p className="text-cream/50 text-sm mb-6 max-w-xs">
-                {item.desc}
-              </p>
+              <p className="text-cream/50 text-sm mb-6 max-w-xs">{item.desc}</p>
               <Link
                 href={item.href}
                 className="self-start border border-cream/40 text-cream font-body text-xs tracking-widest uppercase px-6 py-3 hover:bg-gold hover:border-gold hover:text-charcoal transition-all duration-300"
@@ -302,7 +293,7 @@ export default function HomePage() {
           <div>
             <div className="relative aspect-[3/4] overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800&q=80"
+                src="/ourstory.png"
                 alt="TAYB Founder"
                 fill
                 className="object-cover"
@@ -318,6 +309,12 @@ export default function HomePage() {
               Founder&apos;s
               <em className="block text-gold">Vision</em>
             </h2>
+            <p className="text-cream/50 text-sm mb-6 max-w-xs">
+              Every fragrance at TAYB PERFUMES is a journey of elegance, crafted
+              with passion and inspired by timeless luxury. Designed to leave a
+              lasting impression, our perfumes celebrate confidence,
+              sophistication, and individuality.
+            </p>
           </div>
         </div>
       </section>

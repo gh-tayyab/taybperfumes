@@ -55,7 +55,7 @@ export default function MenPage() {
       {/* Hero */}
       <section className="relative h-[50vh] overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=1800&q=80"
+          src="/menhero.png"
           alt="Men's Fragrances"
           fill
           className="object-cover"
