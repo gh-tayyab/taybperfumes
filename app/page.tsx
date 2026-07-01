@@ -146,6 +146,12 @@ export default function HomePage() {
               Shop All
             </h2>
           </div>
+          <Link
+            href="/all"
+            className="hidden md:flex items-center gap-2 text-xs tracking-widest uppercase text-cream/40 hover:text-gold transition-colors"
+          >
+            View All <span>→</span>
+          </Link>
         </div>
 
         <ProductSlider products={products} />
@@ -179,7 +185,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── BUNDLES ──
+      {/* ── BUNDLES ── */}
       <section className="py-4 max-w-7xl mx-auto px-6 mb-20">
         <div className="flex items-end justify-between mb-12">
           <div>
@@ -191,12 +197,13 @@ export default function HomePage() {
             </h2>
           </div>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {bundles.map((product) => (
+          {bundles.slice(0, 2).map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
-      </section> */}
+      </section>
 
       {/* ── SIGNATURE SPLIT SECTION ── */}
       <section className="grid grid-cols-1 md:grid-cols-2 mb-20">

@@ -19,12 +19,23 @@ export default function ContactClient() {
         body: JSON.stringify(form),
       });
 
-      if (res.ok) {
-        setSent(true);
-        setForm({ name: "", email: "", message: "" });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error);
       }
-    } catch (error) {
-      console.error(error);
+
+      console.log("Contact ID:", data.contactId);
+
+      setSent(true);
+
+      setForm({
+        name: "",
+        email: "",
+        message: "",
+      });
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -52,7 +63,6 @@ export default function ContactClient() {
 
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-
           {/* Form */}
           <div>
             <h2 className="font-display text-2xl text-cream mb-8">
@@ -79,9 +89,7 @@ export default function ContactClient() {
                     type="text"
                     required
                     value={form.name}
-                    onChange={(e) =>
-                      setForm({ ...form, name: e.target.value })
-                    }
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
                     className="w-full bg-transparent border border-gold/20 text-cream px-4 py-3 text-sm font-body placeholder:text-cream/20 outline-none focus:border-gold transition-colors"
                     placeholder="Your name"
                   />
@@ -140,12 +148,12 @@ export default function ContactClient() {
                 {
                   icon: <Mail size={16} className="text-gold" />,
                   label: "Email",
-                  value: "hello@TAYBperfumes.com",
+                  value: "info@taybperfumes.com",
                 },
                 {
                   icon: <Phone size={16} className="text-gold" />,
                   label: "WhatsApp",
-                  value: "+92 300 0000000",
+                  value: "+92 3367189237",
                 },
                 {
                   icon: <MapPin size={16} className="text-gold" />,
@@ -180,7 +188,7 @@ export default function ContactClient() {
                 </a>
 
                 <a
-                  href="https://www.facebook.com/taybperfumes"
+                  href="https://www.facebook.com/profile.php?id=61591221246286"
                   target="_blank"
                   className="border border-gold/20 text-cream/40 hover:border-gold hover:text-gold transition-all p-3"
                 >
@@ -200,7 +208,6 @@ export default function ContactClient() {
                 We typically respond within 24 hours.
               </p>
             </div>
-
           </div>
         </div>
       </div>

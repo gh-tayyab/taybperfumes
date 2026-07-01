@@ -1,26 +1,41 @@
-import { Resend } from "resend";
+import { NextResponse } from "next/server";
+import Airtable from "airtable";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const base = new Airtable({
+  apiKey: process.env.AIRTABLE_API_KEY,
+}).base(process.env.AIRTABLE_BASE_ID!);
 
 export async function POST(req: Request) {
   try {
-    const { name, email, message } = await req.json();
+    const body = await req.json();
 
-    const data = await resend.emails.send({
-      from: "Contact Form <onboarding@resend.dev>", 
-      to: process.env.STORE_EMAIL!, 
-      subject: `New Contact Message from ${name}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-      `,
+    const record = await base(
+      process.env.AIRTABLE_CONTACT_TABLE!
+    ).create([
+      {
+        fields: {
+          Name: body.name,
+          Email: body.email,
+          Message: body.message,
+          Status: "New",
+        },
+      },
+    ]);
+
+    return NextResponse.json({
+      success: true,
+      contactId: record[0].fields.ContactId,
     });
+  } catch (error: any) {
+    console.error(error);
 
-    return Response.json(data);
-  } catch (error) {
-    return Response.json({ error }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: error.message,
+      },
+      {
+        status: 500,
+      }
+    );
   }
 }

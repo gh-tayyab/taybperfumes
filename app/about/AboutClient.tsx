@@ -131,7 +131,7 @@ export default function AboutClient() {
 
           <div className="relative aspect-square overflow-hidden">
             <Image
-              src="https://images.unsplash.com/photo-1590156562745-5d69e2f6ef38?w=800&q=80"
+              src="/ourstory.png"
               alt="TAYB fragrance journey"
               fill
               className="object-cover"
