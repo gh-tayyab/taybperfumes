@@ -10,7 +10,35 @@ function OrderSuccessContent() {
   const params = useSearchParams();
   const orderId = params.get("order_id") || "TAYB-XXXXX";
   const [visible, setVisible] = useState(false);
+  const customerName = params.get("name") || "Customer";
+  const phone = params.get("phone") || "";
+  const city = params.get("city") || "";
+  const address = params.get("address") || "";
+  const total = params.get("total") || "";
 
+  const whatsappMessage = encodeURIComponent(`🌟 Assalam-o-Alaikum TAYB Perfumes,
+
+    Order ID:
+    ${orderId}
+    
+    Customer:
+    ${customerName}
+    
+    Phone:
+    ${phone}
+    
+    City:
+    ${city}
+    
+    Delivery Address:
+    ${address}
+    
+    Amount:
+    Rs. ${total}
+    
+    Kindly confirm my order.
+    
+    Thank you.`);
   useEffect(() => {
     setTimeout(() => setVisible(true), 100);
   }, []);
@@ -41,6 +69,14 @@ function OrderSuccessContent() {
         <p className="text-gold font-medium text-sm mb-6 tracking-wider">
           Order #{orderId}
         </p>
+        <Link
+          href={`https://wa.me/923367189237?text=${whatsappMessage}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 mb-4 inline-flex justify-center w-full bg-[#25D366] text-white font-body font-medium tracking-widest uppercase text-xs px-8 py-4 hover:opacity-90 transition"
+        >
+          Confirm on WhatsApp
+        </Link>
 
         <div className="border border-gold/20 p-6 mb-8 text-left space-y-3">
           {[
@@ -55,7 +91,7 @@ function OrderSuccessContent() {
             </div>
           ))}
         </div>
-
+        
         <div className="flex gap-3 justify-center">
           <Link
             href="/"
@@ -78,11 +114,15 @@ function OrderSuccessContent() {
 export default function OrderSuccessPage() {
   return (
     <div className="pt-[100px]">
-      <Suspense fallback={
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-gold/40 text-sm tracking-widest">Loading...</div>
-        </div>
-      }>
+      <Suspense
+        fallback={
+          <div className="min-h-screen flex items-center justify-center">
+            <div className="text-gold/40 text-sm tracking-widest">
+              Loading...
+            </div>
+          </div>
+        }
+      >
         <OrderSuccessContent />
       </Suspense>
     </div>

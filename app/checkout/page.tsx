@@ -130,7 +130,17 @@ function CheckoutContent() {
   
     clearCart();
   
-    router.push(`/order-success?order_id=${orderId}`);
+    router.push(
+      `/order-success?order_id=${data.orderId}&name=${encodeURIComponent(
+        form.name
+      )}&phone=${encodeURIComponent(
+        form.phone
+      )}&city=${encodeURIComponent(
+        form.city
+      )}&address=${encodeURIComponent(
+        form.address
+      )}&total=${grandTotal}`
+    );
   };
 
   // ── Main submit ────────────────────────────────────────────
