@@ -71,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-PK">
+    <html lang="en-PK" className="overflow-x-hidden">
       <body className="grain bg-charcoal text-cream font-body">
         <a
           href="#main-content"

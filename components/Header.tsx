@@ -39,7 +39,7 @@ export default function Header() {
     <>
       <header
         onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        onMouseLeave={() => setHovered(false)} 
         className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
           isHome
             ? scrolled
