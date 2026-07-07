@@ -6,6 +6,7 @@ import { ShoppingBag, Menu, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useCart } from "@/lib/cart-context";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Men", href: "/men" },
@@ -85,12 +86,19 @@ export default function Header() {
           </nav>
 
           <Link
-            href="/"
-            aria-label="TAYB Home"
-            className="absolute left-1/2 -translate-x-1/2 font-display text-2xl md:text-3xl tracking-[0.2em] text-gold hover:text-gold-light transition-colors duration-300"
-          >
-            TAYB
-          </Link>
+  href="/"
+  aria-label="TAYB Home"
+  className="absolute left-1/2 -translate-x-1/2"
+>
+  <Image
+    src="/logo.png"
+    alt="TAYB Perfumes"
+    width={150}
+    height={50}
+    priority
+    className="h-20 md:h-32 w-auto object-contain"
+  />
+</Link>
 
           <div className="flex items-center gap-5 ml-auto">
           <Link

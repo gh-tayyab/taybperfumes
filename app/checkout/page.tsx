@@ -17,9 +17,6 @@ import { Suspense } from "react";
 
 // ─────────────────────────────────────────────────────────────
 // Types
-// ─────────────────────────────────────────────────────────────
-type PaymentMethod = "cod";
-
 type FormState = {
   name: string;
   email: string;
@@ -43,7 +40,6 @@ function CheckoutContent() {
   const shipping = totalPrice >= 3000 ? 0 : 200;
   const grandTotal = totalPrice + shipping;
 
-  const payment: PaymentMethod = "cod";
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [step, setStep] = useState<"form" | "processing">("form");
@@ -95,7 +91,6 @@ function CheckoutContent() {
 
   // ── COD handler ────────────────────────────────────────────
   const handleCOD = async () => {
-    // Save order
     const res = await fetch("/api/orders", {
       method: "POST",
       headers: {
@@ -115,51 +110,38 @@ function CheckoutContent() {
         paymentMethod: "Cash on Delivery",
       }),
     });
-  
+
     const data = await res.json();
-  
+
     if (!res.ok) {
       throw new Error(data.error || "Order failed");
     }
-  
-    // Airtable ka generated OrderId
-    const orderId = data.orderId;
-  
-    // Emails
-    await sendEmails(orderId, "Pending — Cash on Delivery");
-  
+
+    await sendEmails(data.orderId, "Pending — Cash on Delivery");
+
     clearCart();
-  
+
     router.push(
       `/order-success?order_id=${data.orderId}&name=${encodeURIComponent(
-        form.name
-      )}&phone=${encodeURIComponent(
-        form.phone
-      )}&city=${encodeURIComponent(
-        form.city
-      )}&address=${encodeURIComponent(
-        form.address
-      )}&total=${grandTotal}`
+        form.name,
+      )}&phone=${encodeURIComponent(form.phone)}&city=${encodeURIComponent(
+        form.city,
+      )}&address=${encodeURIComponent(form.address)}&total=${grandTotal}`,
     );
   };
 
   // ── Main submit ────────────────────────────────────────────
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
-    setError(null);
     setLoading(true);
+    setError(null);
     setStep("processing");
-  
+
     try {
       await handleCOD();
-    } catch (err: unknown) {
-      const msg =
-        err instanceof Error
-          ? err.message
-          : "Something went wrong. Please try again.";
-  
-      setError(msg);
+    } catch (err: any) {
+      setError(err.message || "Something went wrong.");
+
       setStep("form");
     } finally {
       setLoading(false);
@@ -299,30 +281,28 @@ function CheckoutContent() {
                 </div>
               </div>
 
-              {/* Payment Method — COD only */}
-              <div>
-                <h2 className="font-body text-xs tracking-widest uppercase text-gold mb-5 pb-3 border-b border-gold/20">
-                  Payment Method
-                </h2>
+             {/* Payment Method */}
+<div className="space-y-4">
+  <h2 className="font-body text-xs tracking-widest uppercase text-gold mb-3 pb-3 border-b border-gold/20">
+    Payment Method
+  </h2>
 
-                <div className="border border-gold bg-gold/5 p-4 flex items-start gap-3">
-                  <Truck size={20} className="text-gold mt-0.5 shrink-0" />
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <p className="text-gold text-sm font-medium">
-                        Cash on Delivery
-                      </p>
-                      <span className="text-[10px] bg-gold/20 text-gold px-2 py-0.5 tracking-wider">
-                        Only Option
-                      </span>
-                    </div>
-                    <p className="text-cream/40 text-xs mt-1">
-                      Pay when your order arrives at your doorstep. No card
-                      needed.
-                    </p>
-                  </div>
-                </div>
-              </div>
+  <div className="border border-gold/20 bg-gold/5 rounded-lg p-5">
+    <div className="flex items-center justify-between">
+      <div>
+        <p className="text-gold font-medium text-base">
+          Cash on Delivery
+        </p>
+
+        <p className="text-cream/50 text-sm mt-1">
+          Pay in cash when your order is delivered to your doorstep.
+        </p>
+      </div>
+
+      {/* <span className="text-3xl">🚚</span> */}
+    </div>
+  </div>
+</div>
 
               {/* Submit */}
               <button
@@ -338,7 +318,7 @@ function CheckoutContent() {
                 ) : (
                   <>
                     <Truck size={16} />
-                    Place Order — Cash on Delivery
+                    Place Order
                   </>
                 )}
               </button>

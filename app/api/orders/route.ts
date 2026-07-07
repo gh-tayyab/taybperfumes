@@ -21,30 +21,44 @@ export async function POST(req: Request) {
           City: body.city,
           PostalCode: body.postalCode,
           Notes: body.notes,
+
           Products: body.items
-            .map((item: any) => `${item.product.name} x${item.quantity}`)
+            .map(
+              (item: any) =>
+                `${item.product.name} (${item.product.size}) x${item.quantity}`
+            )
             .join(", "),
+
           Total: body.total,
+
           Status: "New Order",
-          PaymentStatus: "Pending",
-        }
+
+          PaymentMethod: body.paymentMethod || "Cash on Delivery",
+
+          PaymentStatus: body.paymentStatus || "Pending",
+
+          TransactionId: body.transactionId || "",
+        },
       },
     ]);
 
     return NextResponse.json({
       success: true,
       orderId: record[0].fields.OrderId,
-      record,
+      recordId: record[0].id,
     });
   } catch (error: any) {
     console.error("AIRTABLE FULL ERROR:", error);
-  
+
     return NextResponse.json(
       {
+        success: false,
         error: error.message,
         details: error,
       },
-      { status: 500 }
+      {
+        status: 500,
+      }
     );
   }
 }

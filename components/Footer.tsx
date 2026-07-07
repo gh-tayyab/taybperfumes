@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -43,7 +44,6 @@ export default function Footer() {
       className="bg-[#0f0f0f] border-t border-gold/20 pt-20 pb-8"
     >
       <div className="max-w-7xl mx-auto px-6">
-
         {/* Newsletter */}
         <section
           aria-labelledby="newsletter-heading"
@@ -89,25 +89,25 @@ export default function Footer() {
 
         {/* Links */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-16 border-b border-gold/10">
-
           {/* Brand */}
           <section aria-labelledby="brand-heading">
-            <h3
-              id="brand-heading"
-              className="font-display text-3xl tracking-[0.2em] text-cream mb-4"
-            >
-              TAYB
-            </h3>
+            <Link href="/" aria-label="TAYB Home" className="inline-block">
+              <Image
+                src="/logo.png"
+                alt="TAYB Perfumes"
+                width={180}
+                height={70}
+                priority
+                className="h-28 w-auto object-contain"
+              />
+            </Link>
 
             <p className="text-cream/50 text-sm leading-relaxed max-w-xs">
               Step into the enchanting realm of TAYB Perfumes, where each scent
               is a testament to the art of fragrance creation.
             </p>
 
-            <div
-              className="flex gap-4 mt-6"
-              aria-label="Social media links"
-            >
+            <div className="flex gap-4 mt-6" aria-label="Social media links">
               <a
                 href="https://www.facebook.com/profile.php?id=61591221246286"
                 target="_blank"

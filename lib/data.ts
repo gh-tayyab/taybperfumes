@@ -61,9 +61,9 @@ export const products: Product[] = [
     longDescription:
       "Angelica captures the essence of bloom — a graceful interplay of white florals and warm musk. Jasmine and rose unfurl at the top, while lily and iris bloom at the heart. A whisper of vanilla and white musk grounds this ethereal fragrance in something deeply sensual.",
     image:
-      "/womenperfume.png",
+      "/women/50ml.png",
     hoverImage:
-      "/botel.jpg",
+      "/women/botel50ml.png",
     badge: "New",
     inStock: true,
   },
@@ -125,9 +125,9 @@ export const products: Product[] = [
     longDescription:
       "Carry the delicate magic of Angelica in your pocket. The 10ml travel size is perfect for touch-ups and on-the-go elegance.",
     image:
-      "/womenperfume.png",
+      "/women/50ml.png",
     hoverImage:
-      "/botel.jpg",
+      "/women/botel50ml.png",
     inStock: true,
   },
   {
@@ -146,9 +146,9 @@ export const products: Product[] = [
     longDescription:
       "Angelica in its full splendour. The 100ml bottle is for those who've found their signature and want to wear it every single day.",
     image:
-      "/womenperfume.png",
+      "/women/50ml.png",
     hoverImage:
-      "/botel.jpg",
+      "/women/botel50ml.png",
     inStock: true,
   },
   {

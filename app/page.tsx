@@ -158,7 +158,7 @@ export default function HomePage() {
       </section>
 
       {/* ── MID BANNER ── */}
-      <section className="relative h-[60vh] w-full overflow-hidden mx-6 mb-20">
+      <section className="relative h-[60vh] overflow-hidden rounded-lg mb-20">
         <Image
           src="/hero.png"
           alt="TAYB Bundles"
