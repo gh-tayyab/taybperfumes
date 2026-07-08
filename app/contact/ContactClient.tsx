@@ -158,7 +158,7 @@ export default function ContactClient() {
                 {
                   icon: <MapPin size={16} className="text-gold" />,
                   label: "Location",
-                  value: "Karachi, Pakistan",
+                  value: " R-66 Phase-I Shah Town Bin Qasim. Bin Qasim Karachi",
                 },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-4">
