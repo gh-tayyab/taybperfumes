@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@next/third-parties": "^16.2.12",
     "@stripe/stripe-js": "^3.5.0",
     "airtable": "^0.12.2",
     "axios": "^1.16.1",

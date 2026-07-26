@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { CartProvider } from "@/lib/cart-context";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -78,19 +79,7 @@ export default function RootLayout({
   return (
     <html lang="en-PK" className="overflow-x-hidden">
       <body className="grain bg-charcoal text-cream font-body">
-        <Script
-    src="https://www.googletagmanager.com/gtag/js?id=G-77DKMXDRV1"
-    strategy="afterInteractive"
-  />
-  <Script id="google-analytics" strategy="afterInteractive">
-    {`
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-77DKMXDRV1');
-    `}
-  </Script>
+      <GoogleTagManager gtmId="GTM-KX7VCG3W" />
         <a href="#main-content" className="sr-only focus:not-sr-only">
           Skip to content
         </a>
