@@ -114,7 +114,7 @@ export default function Header() {
                   });
                 }
               }}
-              className="w-12 h-12 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-xl hover:scale-110 transition"
+              className="w-12 h-12 rounded-full flex items-center justify-center text-cream/70 hover:scale-110 transition"
             >
               <FaWhatsapp size={20} />
             </Link>
