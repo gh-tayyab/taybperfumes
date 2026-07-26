@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Script from "next/script";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { CartProvider } from "@/lib/cart-context";
 import Header from "@/components/Header";
@@ -22,7 +21,11 @@ export const metadata: Metadata = {
 
   description:
     "Buy premium luxury perfumes in Pakistan from TAYB Perfumes. Discover long-lasting fragrances for men & women inspired by world-famous scents. Fast delivery across Pakistan.",
-
+  verification: {
+    other: {
+      "msvalidate.01": "3C96E0C8D61864A3B5F0C3DD4D5373F5",
+    },
+  },
   keywords: [
     "TAYB Perfumes",
     "Perfumes Pakistan",
@@ -79,7 +82,7 @@ export default function RootLayout({
   return (
     <html lang="en-PK" className="overflow-x-hidden">
       <body className="grain bg-charcoal text-cream font-body">
-      <GoogleTagManager gtmId="GTM-KX7VCG3W" />
+        <GoogleTagManager gtmId="GTM-KX7VCG3W" />
         <a href="#main-content" className="sr-only focus:not-sr-only">
           Skip to content
         </a>
