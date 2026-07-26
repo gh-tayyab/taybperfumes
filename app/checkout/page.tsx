@@ -57,6 +57,30 @@ function CheckoutContent() {
   useEffect(() => {
     initEmailJS();
   }, []);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (items.length === 0) return;
+  
+    window.dataLayer = window.dataLayer || [];
+  
+    // Previous ecommerce data clear
+    window.dataLayer.push({ ecommerce: null });
+  
+    window.dataLayer.push({
+      event: "begin_checkout",
+      ecommerce: {
+        currency: "PKR",
+        value: grandTotal,
+        items: items.map((item) => ({
+          item_id: item.product.id,
+          item_name: item.product.name,
+          item_category: item.product.category,
+          price: item.product.price,
+          quantity: item.quantity,
+        })),
+      },
+    });
+  }, [items, grandTotal]);
 
   const updateField = (key: keyof FormState, value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));

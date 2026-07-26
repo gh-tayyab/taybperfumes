@@ -43,8 +43,33 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [items]);
 
   const addToCart = (product: Product) => {
+    if (typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+  
+      // Purana ecommerce object clear
+      window.dataLayer.push({ ecommerce: null });
+  
+      window.dataLayer.push({
+        event: "add_to_cart",
+        ecommerce: {
+          currency: "PKR",
+          value: product.price,
+          items: [
+            {
+              item_id: product.id,
+              item_name: product.name,
+              item_category: product.category,
+              price: product.price,
+              quantity: 1,
+            },
+          ],
+        },
+      });
+    }
+  
     setItems((prev) => {
       const existing = prev.find((i) => i.product.id === product.id);
+  
       if (existing) {
         return prev.map((i) =>
           i.product.id === product.id
@@ -52,15 +77,42 @@ export function CartProvider({ children }: { children: ReactNode }) {
             : i
         );
       }
+  
       return [...prev, { product, quantity: 1 }];
     });
+  
     setIsOpen(true);
   };
 
   const removeFromCart = (productId: string) => {
+    const item = items.find((i) => i.product.id === productId);
+  
+    if (item && typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+  
+      // Previous ecommerce object clear karo
+      window.dataLayer.push({ ecommerce: null });
+  
+      window.dataLayer.push({
+        event: "remove_from_cart",
+        ecommerce: {
+          currency: "PKR",
+          value: item.product.price * item.quantity,
+          items: [
+            {
+              item_id: item.product.id,
+              item_name: item.product.name,
+              item_category: item.product.category,
+              price: item.product.price,
+              quantity: item.quantity,
+            },
+          ],
+        },
+      });
+    }
+  
     setItems((prev) => prev.filter((i) => i.product.id !== productId));
   };
-
   const updateQuantity = (productId: string, quantity: number) => {
     if (quantity <= 0) {
       removeFromCart(productId);

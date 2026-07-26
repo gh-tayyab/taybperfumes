@@ -4,7 +4,7 @@ import { products, formatPrice } from "@/lib/data";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/lib/cart-context";
 import { ShoppingBag, ChevronDown, Star, Truck, Shield } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
@@ -22,14 +22,61 @@ export default function ProductPage({ params }: Props) {
     .slice(0, 4);
 
   const [activeImage, setActiveImage] = useState(0);
-  const [openAccordion, setOpenAccordion] = useState<string | null>("description");
+  const [openAccordion, setOpenAccordion] = useState<string | null>(
+    "description",
+  );
   const { addToCart } = useCart();
   const [added, setAdded] = useState(false);
 
   const images = [product.image, product.hoverImage];
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
+    window.dataLayer = window.dataLayer || [];
+
+    // Previous ecommerce data clear karo
+    window.dataLayer.push({ ecommerce: null });
+
+    window.dataLayer.push({
+      event: "view_item",
+      ecommerce: {
+        currency: "PKR",
+        value: product.price,
+        items: [
+          {
+            item_id: product.id,
+            item_name: product.name,
+            item_category: product.category,
+            price: product.price,
+          },
+        ],
+      },
+    });
+  }, [product]);
   const handleAddToCart = () => {
     addToCart(product);
+  
+    if (typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+  
+      window.dataLayer.push({
+        event: "add_to_cart",
+        ecommerce: {
+          currency: "PKR",
+          value: product.price,
+          items: [
+            {
+              item_id: product.id,
+              item_name: product.name,
+              item_category: product.category,
+              price: product.price,
+              quantity: 1,
+            },
+          ],
+        },
+      });
+    }
+  
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
@@ -58,9 +105,14 @@ export default function ProductPage({ params }: Props) {
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center gap-2 text-xs text-cream/30 tracking-wider">
-          <Link href="/" className="hover:text-gold transition-colors">Home</Link>
+          <Link href="/" className="hover:text-gold transition-colors">
+            Home
+          </Link>
           <span>/</span>
-          <Link href={`/${product.category}`} className="hover:text-gold transition-colors capitalize">
+          <Link
+            href={`/${product.category}`}
+            className="hover:text-gold transition-colors capitalize"
+          >
             {product.category}
           </Link>
           <span>/</span>
@@ -111,7 +163,9 @@ export default function ProductPage({ params }: Props) {
 
           {/* Info */}
           <div>
-            <h1 className="font-display text-4xl md:text-5xl text-cream mb-4">{product.name}</h1>
+            <h1 className="font-display text-4xl md:text-5xl text-cream mb-4">
+              {product.name}
+            </h1>
 
             {/* Stars */}
             <div className="flex items-center gap-2 mb-6">
@@ -120,7 +174,9 @@ export default function ProductPage({ params }: Props) {
                   <Star key={i} size={12} className="fill-gold text-gold" />
                 ))}
               </div>
-              <span className="text-cream/30 text-xs tracking-wider">(127 reviews)</span>
+              <span className="text-cream/30 text-xs tracking-wider">
+                (127 reviews)
+              </span>
             </div>
 
             {/* Price */}
@@ -146,7 +202,9 @@ export default function ProductPage({ params }: Props) {
 
             {/* Size */}
             <div className="mb-8">
-              <p className="text-xs tracking-widest uppercase text-cream/30 mb-3">Size</p>
+              <p className="text-xs tracking-widest uppercase text-cream/30 mb-3">
+                Size
+              </p>
               <div className="inline-flex border border-gold items-center px-4 py-2 text-sm text-gold tracking-wider">
                 {product.size}
               </div>
@@ -200,7 +258,7 @@ export default function ProductPage({ params }: Props) {
                         <div className="space-y-3">
                           {(["top", "heart", "base"] as const).map((tier) => (
                             <div key={tier} className="flex gap-4">
-                              <span className="text-gold text-xs tracking-widest uppercase w-12 shrink-0 mt-0.5 capitalize">
+                              <span className="text-gold text-xs tracking-widest uppercase w-12 shrink-0 mt-0.5">
                                 {tier}
                               </span>
                               <span>{product.notes[tier].join(" · ")}</span>

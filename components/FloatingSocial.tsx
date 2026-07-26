@@ -9,7 +9,6 @@ export default function FloatingSocial() {
 
   return (
     <div className="fixed bottom-6 right-6 z-[999] flex flex-col items-center gap-3">
-
       {/* Social Icons */}
 
       <div
@@ -22,6 +21,16 @@ export default function FloatingSocial() {
         <a
           href="https://wa.me/923367189237"
           target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => {
+            if (typeof window !== "undefined") {
+              window.dataLayer = window.dataLayer || [];
+
+              window.dataLayer.push({
+                event: "whatsapp_click",
+              });
+            }
+          }}
           className="w-12 h-12 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-xl hover:scale-110 transition"
         >
           <FaWhatsapp size={20} />

@@ -39,9 +39,26 @@ function OrderSuccessContent() {
     Kindly confirm my order.
     
     Thank you.`);
-  useEffect(() => {
-    setTimeout(() => setVisible(true), 100);
-  }, []);
+    useEffect(() => {
+      setTimeout(() => setVisible(true), 100);
+    
+      if (typeof window === "undefined") return;
+    
+      window.dataLayer = window.dataLayer || [];
+    
+      // Previous ecommerce object clear
+      window.dataLayer.push({ ecommerce: null });
+    
+      window.dataLayer.push({
+        event: "purchase",
+        ecommerce: {
+          transaction_id: orderId,
+          currency: "PKR",
+          value: Number(total),
+          items: [],
+        },
+      });
+    }, [orderId, total]);
 
   return (
     <div

@@ -40,7 +40,7 @@ export default function Header() {
     <>
       <header
         onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)} 
+        onMouseLeave={() => setHovered(false)}
         className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
           isHome
             ? scrolled
@@ -86,29 +86,38 @@ export default function Header() {
           </nav>
 
           <Link
-  href="/"
-  aria-label="TAYB Home"
-  className="absolute left-1/2 -translate-x-1/2"
->
-  <Image
-    src="/logo.png"
-    alt="TAYB Perfumes"
-    width={150}
-    height={50}
-    priority
-    className="h-20 md:h-32 w-auto object-contain"
-  />
-</Link>
+            href="/"
+            aria-label="TAYB Home"
+            className="absolute left-1/2 -translate-x-1/2"
+          >
+            <Image
+              src="/logo.png"
+              alt="TAYB Perfumes"
+              width={150}
+              height={50}
+              priority
+              className="h-20 md:h-32 w-auto object-contain"
+            />
+          </Link>
 
           <div className="flex items-center gap-5 ml-auto">
-          <Link
-    href="https://wa.me/923367189237"
-    target="_blank"
-    aria-label="Chat on WhatsApp"
-    className="text-cream/70 hover:text-green-500 transition-colors hidden md:flex"
-  >
-    <FaWhatsapp size={22} />
-  </Link>
+            <Link
+              href="https://wa.me/923367189237"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.dataLayer = window.dataLayer || [];
+
+                  window.dataLayer.push({
+                    event: "whatsapp_click",
+                  });
+                }
+              }}
+              className="w-12 h-12 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-xl hover:scale-110 transition"
+            >
+              <FaWhatsapp size={20} />
+            </Link>
 
             <button
               aria-label="Open cart"
