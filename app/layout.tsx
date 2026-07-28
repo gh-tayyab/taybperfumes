@@ -1,21 +1,51 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import dynamic from "next/dynamic";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { CartProvider } from "@/lib/cart-context";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import CartDrawer from "@/components/CartDrawer";
 import AnnouncementBar from "@/components/AnnouncementBar";
-import FloatingSocial from "@/components/FloatingSocial";
+import { Cormorant_Garamond, Jost } from "next/font/google";
+
+const FloatingSocial = dynamic(
+  () => import("@/components/FloatingSocial"),
+  {
+    ssr: false,
+  }
+);
+
+const Footer = dynamic(
+  () => import("@/components/Footer")
+);
+const CartDrawer = dynamic(
+  () => import("@/components/CartDrawer"),
+  {
+    ssr: false,
+  }
+);
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://taybperfumes.com";
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+
+const jost = Jost({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
+
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default:
-      "Best Luxury Long-Lasting Perfumes For Men & Women | TAYB",
+    default: "Best Luxury Long-Lasting Perfumes For Men & Women | TAYB",
     template: "%s | TAYB Perfumes",
   },
 
@@ -81,7 +111,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-PK" className="overflow-x-hidden">
-      <body className="grain bg-charcoal text-cream font-body">
+      <body
+        className={`${cormorant.variable} ${jost.variable} grain bg-charcoal text-cream`}
+      >
         <GoogleTagManager gtmId="GTM-KX7VCG3W" />
         <a href="#main-content" className="sr-only focus:not-sr-only">
           Skip to content

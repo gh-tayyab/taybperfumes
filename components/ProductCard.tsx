@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
+import { memo, useState } from "react";
+
 import { Product, formatPrice } from "@/lib/data";
 import { useCart } from "@/lib/cart-context";
 
@@ -10,8 +12,9 @@ interface Props {
   product: Product;
 }
 
-export default function ProductCard({ product }: Props) {
+function ProductCard({ product }: Props) {
   const { addToCart } = useCart();
+  const [hover, setHover] = useState(false);
 
   return (
     <div className="product-card group relative">
@@ -23,7 +26,11 @@ export default function ProductCard({ product }: Props) {
       )}
 
       {/* Image */}
-      <Link href={`/product/${product.slug}`} className="block overflow-hidden bg-[#1e1e1e] relative aspect-[3/4]">
+      <Link
+        href={`/product/${product.slug}`}
+        onMouseEnter={() => setHover(true)}
+        className="block overflow-hidden bg-[#1e1e1e] relative aspect-[3/4]"
+      >
         <Image
           src={product.image}
           alt={product.name}
@@ -31,17 +38,20 @@ export default function ProductCard({ product }: Props) {
           className="product-main-img object-cover group-hover:scale-105 transition-transform duration-700"
           sizes="(max-width: 768px) 50vw, 25vw"
         />
-        <Image
-          src={product.hoverImage}
-          alt={product.name}
-          fill
-          className="product-hover-img object-cover absolute inset-0"
-          sizes="(max-width: 768px) 50vw, 25vw"
-        />
+        {hover && (
+          <Image
+            src={product.hoverImage}
+            alt={product.name}
+            fill
+            className="product-hover-img object-cover absolute inset-0"
+            sizes="(max-width: 768px) 50vw, 25vw"
+          />
+        )}
 
         {/* Quick Add overlay */}
         <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-400 bg-charcoal/95 backdrop-blur-sm">
           <button
+            aria-label={`Add ${product.name} to cart`}
             onClick={(e) => {
               e.preventDefault();
               addToCart(product);
@@ -62,7 +72,9 @@ export default function ProductCard({ product }: Props) {
           </h3>
         </Link>
         <div className="flex items-center gap-2 mt-2">
-          <span className="text-gold font-medium text-sm">{formatPrice(product.price)}</span>
+          <span className="text-gold font-medium text-sm">
+            {formatPrice(product.price)}
+          </span>
           {product.originalPrice && (
             <span className="text-cream/30 text-xs line-through">
               {formatPrice(product.originalPrice)}
@@ -73,3 +85,5 @@ export default function ProductCard({ product }: Props) {
     </div>
   );
 }
+
+export default memo(ProductCard);

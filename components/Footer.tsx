@@ -108,7 +108,7 @@ export default function Footer() {
             </p>
 
             <div className="flex gap-4 mt-6" aria-label="Social media links">
-              <a
+              <Link
                 href="https://www.facebook.com/profile.php?id=61591221246286"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -116,9 +116,9 @@ export default function Footer() {
                 className="text-cream/40 hover:text-gold transition-colors"
               >
                 <Facebook size={18} />
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="https://instagram.com/taybperfumes"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -126,18 +126,18 @@ export default function Footer() {
                 className="text-cream/40 hover:text-gold transition-colors"
               >
                 <Instagram size={18} />
-              </a>
+              </Link>
             </div>
           </section>
 
           {/* About */}
           <nav aria-labelledby="about-links">
-            <h4
+            <h3
               id="about-links"
               className="font-body text-xs tracking-widest uppercase text-gold mb-5"
             >
               About
-            </h4>
+            </h3>
 
             <ul className="space-y-3">
               {[
@@ -161,12 +161,12 @@ export default function Footer() {
 
           {/* Policies */}
           <nav aria-labelledby="policy-links">
-            <h4
+            <h3
               id="policy-links"
               className="font-body text-xs tracking-widest uppercase text-gold mb-5"
             >
               Policies
-            </h4>
+            </h3>
 
             <ul className="space-y-3">
               {[

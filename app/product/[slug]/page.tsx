@@ -130,6 +130,7 @@ export default function ProductPage({ params }: Props) {
                 src={images[activeImage]}
                 alt={product.name}
                 fill
+                quality={85}
                 className="object-cover"
                 priority
               />

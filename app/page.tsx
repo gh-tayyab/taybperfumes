@@ -4,7 +4,22 @@ import Link from "next/link";
 import { products, reviews } from "@/lib/data";
 import ProductCard from "@/components/ProductCard";
 import { Star, Shield, Truck, RefreshCw, Sparkles } from "lucide-react";
-import ProductSlider from "@/components/ProductSlider";
+
+import dynamic from "next/dynamic";
+
+const ReviewsSection = dynamic(
+  () => import("@/components/ReviewsSection"),
+  {
+    loading: () => <div className="h-[400px]" />,
+  }
+);
+const ProductSlider = dynamic(
+  () => import("@/components/ProductSlider"),
+  {
+    ssr: false,
+    loading: () => <div className="h-[500px]" />,
+  }
+);
 
 export const metadata: Metadata = {
   title: "TAYB Perfumes Pakistan | Luxury Long-Lasting Fragrances",
@@ -65,6 +80,7 @@ export default function HomePage() {
             fill
             className="object-cover"
             priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/70 to-transparent" />
         </div>
@@ -164,6 +180,7 @@ export default function HomePage() {
           alt="TAYB Bundles"
           fill
           className="object-cover"
+          priority
         />
         <div className="absolute inset-0 bg-charcoal/60" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
@@ -254,45 +271,8 @@ export default function HomePage() {
           </div>
         ))}
       </section>
-
-      {/* ── REVIEWS ── */}
-      <section className="py-20 bg-[#0f0f0f]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">
-              Testimonials
-            </p>
-            <h2 className="font-display text-4xl md:text-5xl text-cream">
-              Happy Customers
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {reviews.slice(0, 3).map((review) => (
-              <div
-                key={review.id}
-                className="border border-gold/10 p-6 hover:border-gold/30 transition-colors duration-300 bg-charcoal"
-              >
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} size={12} className="fill-gold text-gold" />
-                  ))}
-                </div>
-                <p className="font-display italic text-lg text-cream/80 leading-relaxed mb-4">
-                  &ldquo;{review.text}&rdquo;
-                </p>
-                <div className="flex justify-between items-center text-xs text-cream/30 tracking-wider uppercase">
-                  <span>{review.name}</span>
-                  <span>{review.location}</span>
-                </div>
-                <p className="text-gold/50 text-xs mt-1 tracking-wider">
-                  {review.product}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ReviewsSection reviews={reviews.slice(0, 3)} />
+      
 
       {/* ── FOUNDER'S VISION ── */}
       <section className="py-20 max-w-7xl mx-auto px-6">
@@ -303,6 +283,7 @@ export default function HomePage() {
                 src="/ourstory.png"
                 alt="TAYB Founder"
                 fill
+                priority
                 className="object-cover"
               />
             </div>

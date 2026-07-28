@@ -23,14 +23,23 @@ export default function Header() {
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+  
     const onScroll = () => {
-      setScrolled(window.scrollY > 60);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 60);
+          ticking = false;
+        });
+  
+        ticking = true;
+      }
     };
-
+  
     window.addEventListener("scroll", onScroll, {
       passive: true,
     });
-
+  
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -105,6 +114,7 @@ export default function Header() {
               href="https://wa.me/923367189237"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="WhatsApp"
               onClick={() => {
                 if (typeof window !== "undefined") {
                   window.dataLayer = window.dataLayer || [];

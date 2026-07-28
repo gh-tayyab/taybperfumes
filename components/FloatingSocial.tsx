@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronUp, X } from "lucide-react";
 import { FaWhatsapp, FaInstagram, FaFacebookF } from "react-icons/fa";
+import Link from "next/link";
 
 export default function FloatingSocial() {
   const [open, setOpen] = useState(false);
@@ -18,10 +19,11 @@ export default function FloatingSocial() {
             : "opacity-0 translate-y-4 pointer-events-none"
         }`}
       >
-        <a
+        <Link
           href="https://wa.me/923367189237"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Chat with us on WhatsApp"
           onClick={() => {
             if (typeof window !== "undefined") {
               window.dataLayer = window.dataLayer || [];
@@ -34,29 +36,32 @@ export default function FloatingSocial() {
           className="w-12 h-12 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-xl hover:scale-110 transition"
         >
           <FaWhatsapp size={20} />
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="https://instagram.com/taybperfumes"
           target="_blank"
+          aria-label="Visit our Instagram page"
           className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 flex items-center justify-center text-white shadow-xl hover:scale-110 transition"
         >
           <FaInstagram size={20} />
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="https://www.facebook.com/people/TAYB-Perfumes/61591221246286/"
           target="_blank"
+          aria-label="Visit our Facebook page"
           className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-xl hover:scale-110 transition"
         >
           <FaFacebookF size={20} />
-        </a>
+        </Link>
       </div>
 
       {/* Toggle Button */}
 
       <button
         onClick={() => setOpen(!open)}
+        aria-label={open ? "Close social links" : "Open social links"}
         className="w-12 h-12 rounded-full bg-gold text-charcoal shadow-2xl flex items-center justify-center hover:scale-110 transition-all"
       >
         {open ? <X size={20} /> : <ChevronUp size={20} />}
