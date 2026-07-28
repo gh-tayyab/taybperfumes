@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "taybperfumes.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
     ],
   },
 };
