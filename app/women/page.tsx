@@ -4,7 +4,7 @@ import ProductCard from "@/components/ProductCard";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Women’s Perfumes | Luxury Fragrances for Her | TAYB Pakistan",
+  title: "Women’s Luxury Fragrances | TAYB Pakistan",
   description:
     "Explore TAYB women’s luxury perfumes in Pakistan. Long-lasting feminine fragrances crafted for elegance, confidence, and timeless beauty.",
   keywords: [
