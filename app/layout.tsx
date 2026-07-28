@@ -27,7 +27,8 @@ const CartDrawer = dynamic(
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://taybperfumes.com";
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
   variable: "--font-display",
   display: "swap",
 });
@@ -39,7 +40,6 @@ const jost = Jost({
   variable: "--font-body",
   display: "swap",
 });
-
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

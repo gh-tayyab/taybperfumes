@@ -71,6 +71,16 @@ body {
   width: 100%;
 }
 
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 300;
+}
+
+.font-body {
+  font-family: var(--font-body);
+  font-weight: 300;
+}
+
 /* Marquee animation */
 @keyframes marquee {
   0% { transform: translateX(0); }
