@@ -7,10 +7,7 @@ import { Shield, Truck, RefreshCw, Sparkles } from "lucide-react";
 
 import dynamic from "next/dynamic";
 
-const ProductSlider = dynamic(() => import("@/components/ProductSlider"), {
-  ssr: false,
-  loading: () => <div className="h-[500px]" />,
-});
+import LazyProductSlider from "@/components/LazyProductSlider";
 
 const ReviewsSection = dynamic(() => import("@/components/ReviewsSection"), {
   loading: () => <div className="h-[400px]" />,
@@ -96,7 +93,7 @@ export default function HomePage() {
             fill
             priority
             fetchPriority="high"
-            quality={85}
+            quality={70}
             sizes="100vw"
             className="object-cover"
           />
@@ -188,7 +185,7 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <ProductSlider products={products.slice(0, 8)} />
+        <LazyProductSlider products={products.slice(0, 8)} />
       </section>
      
       <HomeBanner />

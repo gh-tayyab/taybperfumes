@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import dynamic from "next/dynamic";
-import { GoogleTagManager } from "@next/third-parties/google";
 import { CartProvider } from "@/lib/cart-context";
 import Header from "@/components/Header";
 import AnnouncementBar from "@/components/AnnouncementBar";
+import GTM from "@/components/GTM";
 import { Cormorant_Garamond, Jost } from "next/font/google";
-import Script from "next/script";
 
 const FloatingSocial = dynamic(() => import("@/components/FloatingSocial"), {
   ssr: false,
@@ -106,22 +105,7 @@ export default function RootLayout({
       <body
         className={`${cormorant.variable} ${jost.variable} grain bg-charcoal text-cream`}
       >
-        <Script
-          id="gtm"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-      (function(w,d,s,l,i){w[l]=w[l]||[];
-      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
-      var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-      j.async=true;
-      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-      f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-KX7VCG3W');
-    `,
-          }}
-        />
+        <GTM />
         <a href="#main-content" className="sr-only focus:not-sr-only">
           Skip to content
         </a>
