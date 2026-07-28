@@ -3,24 +3,40 @@ import Image from "next/image";
 import Link from "next/link";
 import { products, reviews } from "@/lib/data";
 import ProductCard from "@/components/ProductCard";
-import { Star, Shield, Truck, RefreshCw, Sparkles } from "lucide-react";
+import { Shield, Truck, RefreshCw, Sparkles } from "lucide-react";
 
 import dynamic from "next/dynamic";
 
-const ReviewsSection = dynamic(
-  () => import("@/components/ReviewsSection"),
+const ProductSlider = dynamic(() => import("@/components/ProductSlider"), {
+  ssr: false,
+  loading: () => <div className="h-[500px]" />,
+});
+
+const ReviewsSection = dynamic(() => import("@/components/ReviewsSection"), {
+  loading: () => <div className="h-[400px]" />,
+});
+
+const HomeBanner = dynamic(() => import("@/components/home/HomeBanner"), {
+  loading: () => <div className="h-[60vh]" />,
+});
+
+const HomeBundles = dynamic(() => import("@/components/home/HomeBundles"), {
+  loading: () => <div className="h-[700px]" />,
+});
+
+const HomeSplitSection = dynamic(
+  () => import("@/components/home/HomeSplitSection"),
   {
-    loading: () => <div className="h-[400px]" />,
-  }
-);
-const ProductSlider = dynamic(
-  () => import("@/components/ProductSlider"),
-  {
-    ssr: false,
-    loading: () => <div className="h-[500px]" />,
-  }
+    loading: () => <div className="h-[70vh]" />,
+  },
 );
 
+const FounderSection = dynamic(
+  () => import("@/components/home/FounderSection"),
+  {
+    loading: () => <div className="h-[700px]" />,
+  },
+);
 export const metadata: Metadata = {
   title: "TAYB Perfumes Pakistan | Luxury Long-Lasting Fragrances",
   description:
@@ -78,9 +94,11 @@ export default function HomePage() {
             src="/bundleperfume.png"
             alt="TAYB Perfumes Hero"
             fill
-            className="object-cover"
             priority
+            fetchPriority="high"
+            quality={85}
             sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/70 to-transparent" />
         </div>
@@ -170,142 +188,14 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <ProductSlider products={products} />
+        <ProductSlider products={products.slice(0, 8)} />
       </section>
-
-      {/* ── MID BANNER ── */}
-      <section className="relative h-[60vh] overflow-hidden rounded-lg mb-20">
-        <Image
-          src="/hero.png"
-          alt="TAYB Bundles"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-charcoal/60" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4">
-            Limited Offer
-          </p>
-          <h2 className="font-display text-5xl md:text-7xl text-cream mb-4 italic">
-            Bundle & Save 10%
-          </h2>
-          <p className="text-cream/60 text-sm tracking-wider mb-8 max-w-md">
-            Get both signature scents together and save on every order.
-          </p>
-          <Link
-            href="/bundles"
-            className="bg-gold text-charcoal font-body font-medium tracking-widest uppercase text-xs px-8 py-4 hover:bg-gold-light transition-colors duration-300"
-          >
-            Shop Bundles
-          </Link>
-        </div>
-      </section>
-
-      {/* ── BUNDLES ── */}
-      <section className="py-4 max-w-7xl mx-auto px-6 mb-20">
-        <div className="flex items-end justify-between mb-12">
-          <div>
-            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">
-              Save More
-            </p>
-            <h2 className="font-display text-4xl md:text-5xl text-cream">
-              Bundles
-            </h2>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {bundles.slice(0, 2).map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </section>
-
-      {/* ── SIGNATURE SPLIT SECTION ── */}
-      <section className="grid grid-cols-1 md:grid-cols-2 mb-20">
-        {[
-          {
-            label: "For Her",
-            name: "Angelica",
-            desc: "Delicate florals, soft musk, warm sandalwood. A scent that lingers like a beautiful memory.",
-            href: "/women",
-            img: "/womenperfume.png",
-            cta: "Shop Women",
-          },
-          {
-            label: "For Him",
-            name: "Laceda",
-            desc: "Bold cedarwood, rich amber, clean musk. A commanding presence in every room.",
-            href: "/men",
-            img: "/perfume.png",
-            cta: "Shop Men",
-          },
-        ].map((item) => (
-          <div
-            key={item.name}
-            className="relative h-[70vh] overflow-hidden group"
-          >
-            <Image
-              src={item.img}
-              alt={item.name}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-1000"
-            />
-            <div className="absolute inset-0 bg-charcoal/60 group-hover:bg-charcoal/50 transition-colors duration-500" />
-            <div className="absolute inset-0 flex flex-col justify-end p-10">
-              <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">
-                {item.label}
-              </p>
-              <h3 className="font-display text-5xl text-cream italic mb-3">
-                {item.name}
-              </h3>
-              <p className="text-cream/50 text-sm mb-6 max-w-xs">{item.desc}</p>
-              <Link
-                href={item.href}
-                className="self-start border border-cream/40 text-cream font-body text-xs tracking-widest uppercase px-6 py-3 hover:bg-gold hover:border-gold hover:text-charcoal transition-all duration-300"
-              >
-                {item.cta}
-              </Link>
-            </div>
-          </div>
-        ))}
-      </section>
+     
+      <HomeBanner />
+      <HomeBundles bundles={bundles.slice(0, 2)} />
+      <HomeSplitSection />
       <ReviewsSection reviews={reviews.slice(0, 3)} />
-      
-
-      {/* ── FOUNDER'S VISION ── */}
-      <section className="py-20 max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div>
-            <div className="relative aspect-[3/4] overflow-hidden">
-              <Image
-                src="/ourstory.png"
-                alt="TAYB Founder"
-                fill
-                priority
-                className="object-cover"
-              />
-            </div>
-          </div>
-
-          <div>
-            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-4">
-              Our Story
-            </p>
-            <h2 className="font-display text-4xl md:text-5xl text-cream mb-6 leading-tight">
-              Founder&apos;s
-              <em className="block text-gold">Vision</em>
-            </h2>
-            <p className="text-cream/50 text-sm mb-6 max-w-xs">
-              Every fragrance at TAYB PERFUMES is a journey of elegance, crafted
-              with passion and inspired by timeless luxury. Designed to leave a
-              lasting impression, our perfumes celebrate confidence,
-              sophistication, and individuality.
-            </p>
-          </div>
-        </div>
-      </section>
+      <FounderSection />
     </div>
   );
 }

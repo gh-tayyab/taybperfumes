@@ -6,23 +6,16 @@ import { CartProvider } from "@/lib/cart-context";
 import Header from "@/components/Header";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import { Cormorant_Garamond, Jost } from "next/font/google";
+import Script from "next/script";
 
-const FloatingSocial = dynamic(
-  () => import("@/components/FloatingSocial"),
-  {
-    ssr: false,
-  }
-);
+const FloatingSocial = dynamic(() => import("@/components/FloatingSocial"), {
+  ssr: false,
+});
 
-const Footer = dynamic(
-  () => import("@/components/Footer")
-);
-const CartDrawer = dynamic(
-  () => import("@/components/CartDrawer"),
-  {
-    ssr: false,
-  }
-);
+const Footer = dynamic(() => import("@/components/Footer"));
+const CartDrawer = dynamic(() => import("@/components/CartDrawer"), {
+  ssr: false,
+});
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://taybperfumes.com";
 const cormorant = Cormorant_Garamond({
@@ -32,7 +25,6 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-display",
   display: "swap",
 });
-
 
 const jost = Jost({
   subsets: ["latin"],
@@ -114,7 +106,22 @@ export default function RootLayout({
       <body
         className={`${cormorant.variable} ${jost.variable} grain bg-charcoal text-cream`}
       >
-        <GoogleTagManager gtmId="GTM-KX7VCG3W" />
+        <Script
+          id="gtm"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+      (function(w,d,s,l,i){w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-KX7VCG3W');
+    `,
+          }}
+        />
         <a href="#main-content" className="sr-only focus:not-sr-only">
           Skip to content
         </a>
