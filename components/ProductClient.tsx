@@ -10,11 +10,23 @@ import { useCart } from "@/lib/cart-context";
 import { Product, products, formatPrice } from "@/lib/data";
 import ProductCard from "@/components/ProductCard";
 
-interface Props {
-  product: Product;
+interface Review {
+  _id: string;
+  name: string;
+  city: string;
+  rating: number;
+  review: string;
+  verifiedPurchase: boolean;
+  longevity?: string;
+  image?: string;
 }
 
-export default function ProductClient({ product }: Props) {
+interface Props {
+  product: Product;
+  reviews: Review[];
+}
+
+export default function ProductClient({ product, reviews }: Props) {
   const { addToCart } = useCart();
   const router = useRouter();
 
@@ -31,6 +43,14 @@ export default function ProductClient({ product }: Props) {
   const [added, setAdded] = useState(false);
 
   const images = [product.image, product.hoverImage];
+  const reviewCount = reviews.length;
+
+  const averageRating =
+    reviewCount > 0
+      ? (
+          reviews.reduce((sum, review) => sum + review.rating, 0) / reviewCount
+        ).toFixed(1)
+      : "5.0";
   const sizes = products.filter(
     (p) =>
       p.category === product.category &&
@@ -211,6 +231,22 @@ export default function ProductClient({ product }: Props) {
               {product.name}
             </h1>
 
+            {/* Rating */}
+            <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={15} className="fill-gold text-gold" />
+                ))}
+              </div>
+
+              <span className="text-gold font-medium">{averageRating}</span>
+
+              <span className="text-cream/40 text-sm">
+                ({reviewCount} {reviewCount === 1 ? "review" : "reviews"})
+              </span>
+            </div>
+
+            {/* Price */}
             <div className="flex items-center gap-3 mb-8">
               <span className="font-display text-3xl text-gold">
                 {formatPrice(product.price)}
@@ -222,7 +258,7 @@ export default function ProductClient({ product }: Props) {
                     {formatPrice(product.originalPrice)}
                   </span>
 
-                  <span className="bg-gold/20 text-gold text-xs px-2 py-1">
+                  <span className="bg-gold/20 text-gold text-xs px-2 py-1 rounded">
                     Save {product.discount}%
                   </span>
                 </>
@@ -259,7 +295,6 @@ export default function ProductClient({ product }: Props) {
                 <span className="text-cream">2–4 Working Days</span>
               </div>
             </div>
-
             <p className="text-sm leading-relaxed text-cream/50 mb-8">
               {product.description}
             </p>
@@ -286,7 +321,6 @@ export default function ProductClient({ product }: Props) {
                 ))}
               </div>
             </div>
-
             {/* Add to Cart */}
             <button
               onClick={handleAddToCart}
@@ -296,7 +330,6 @@ export default function ProductClient({ product }: Props) {
 
               {added ? "Added to Cart ✓" : "Add to Cart"}
             </button>
-
             {/* Trust Badges */}
             <div className="mb-8 grid grid-cols-2 gap-3">
               <div className="flex items-center gap-2 text-xs tracking-wider text-cream/30">
@@ -309,7 +342,6 @@ export default function ProductClient({ product }: Props) {
                 100% Authentic
               </div>
             </div>
-
             {/* Accordions */}
             <div className="space-y-0 border-t border-gold/20">
               {accordions.map((accordion) => (
@@ -403,6 +435,104 @@ export default function ProductClient({ product }: Props) {
           ))}
         </div>
       </section>
+
+      {reviews.length > 0 && (
+  <section className="max-w-7xl mx-auto px-6 py-20 border-t border-gold/10">
+    <div className="mb-12">
+      <p className="text-gold text-xs tracking-[0.35em] uppercase mb-3">
+        Customer Reviews
+      </p>
+
+      <h2 className="font-display text-4xl text-cream mb-3">
+        What Customers Say
+      </h2>
+
+      <div className="flex items-center gap-3">
+        <div className="flex gap-1">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star
+              key={i}
+              size={16}
+              className="fill-gold text-gold"
+            />
+          ))}
+        </div>
+
+        <span className="text-gold font-medium">
+          {averageRating}
+        </span>
+
+        <span className="text-cream/40">
+          ({reviewCount} Reviews)
+        </span>
+      </div>
+    </div>
+
+    <div className="grid gap-6 md:grid-cols-2">
+      {reviews.map((review) => (
+        <div
+          key={review._id}
+          className="border border-gold/10 bg-[#161616] p-6"
+        >
+          <div className="flex items-start justify-between mb-5">
+            <div className="flex items-center gap-4">
+              {review.image ? (
+                <Image
+                  src={review.image}
+                  alt={review.name}
+                  width={56}
+                  height={56}
+                  className="rounded-full object-cover"
+                />
+              ) : (
+                <div className="w-14 h-14 rounded-full bg-gold/20 flex items-center justify-center text-gold font-semibold">
+                  {review.name.charAt(0)}
+                </div>
+              )}
+
+              <div>
+                <h3 className="text-cream font-medium">
+                  {review.name}
+                </h3>
+
+                <p className="text-xs text-cream/40">
+                  {review.city}
+                </p>
+              </div>
+            </div>
+
+            {review.verifiedPurchase && (
+              <span className="bg-green-600/20 text-green-400 text-[10px] uppercase tracking-wider px-3 py-1 rounded-full">
+                Verified Purchase
+              </span>
+            )}
+          </div>
+
+          <div className="flex gap-1 mb-4">
+            {Array.from({ length: review.rating }).map((_, i) => (
+              <Star
+                key={i}
+                size={15}
+                className="fill-gold text-gold"
+              />
+            ))}
+          </div>
+
+          {review.longevity && (
+            <p className="text-gold text-xs uppercase tracking-wider mb-3">
+              Longevity: {review.longevity}
+            </p>
+          )}
+
+          <p className="text-cream/60 leading-7">
+            {review.review}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
       {/* Related Products */}
       {related.length > 0 && (
         <section className="max-w-7xl mx-auto px-6 py-20 border-t border-gold/10">

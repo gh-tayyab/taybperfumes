@@ -51,3 +51,26 @@ longevity,
 
 }
 `;
+
+
+export const productReviewsQuery = groq`
+*[
+  _type=="review" &&
+  approved==true &&
+  productSlug==$slug
+] | order(submittedAt desc){
+
+  _id,
+
+  name,
+  city,
+
+  rating,
+  review,
+
+  verifiedPurchase,
+  longevity,
+
+  "image": photo.asset->url
+}
+`;

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { products } from "@/lib/data";
+import { client } from "@/lib/sanity";
+import { productReviewsQuery } from "@/lib/queries";
 import ProductClient from "@/components/ProductClient";
 
 interface Props {
@@ -69,12 +71,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   };
 }
-export default function ProductPage({ params }: Props) {
+export default async function ProductPage({ params }: Props) {
   const product = products.find((p) => p.slug === params.slug);
 
   if (!product) {
     notFound();
   }
+  const reviews = await client.fetch(
+    productReviewsQuery,
+    {
+      slug: product.slug,
+    },
+    {
+      next: {
+        tags: ["reviews"],
+      },
+    },
+  );
+
+  const reviewCount = reviews.length;
+
+  const averageRating =
+    reviewCount > 0
+      ? (
+          reviews.reduce(
+            (sum: number, r: { rating: number }) => sum + r.rating,
+            0,
+          ) / reviewCount
+        ).toFixed(1)
+      : "5";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -114,9 +139,9 @@ export default function ProductPage({ params }: Props) {
     aggregateRating: {
       "@type": "AggregateRating",
 
-      ratingValue: "5",
+      ratingValue: averageRating,
 
-      reviewCount: "127",
+      reviewCount: reviewCount,
     },
   };
 
@@ -213,7 +238,7 @@ export default function ProductPage({ params }: Props) {
         }}
       />
 
-      <ProductClient product={product} />
+      <ProductClient product={product} reviews={reviews} />
     </>
   );
 }
