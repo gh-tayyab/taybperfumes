@@ -2,9 +2,12 @@
 
 export interface Product {
   id: string;
+  sku: string;
+  brand: string;
   name: string;
   slug: string;
   price: number;
+  family: string;
   originalPrice?: number;
   size: string;
   category: "men" | "women" | "bundle";
@@ -25,9 +28,12 @@ export interface Product {
 export const products: Product[] = [
   {
     id: "1",
+    sku: "LACEDA-50",
+    brand: "TAYB Perfumes",
     name: "Laceda 50ml",
     slug: "laceda-50ml",
     price: 4999,
+    family: "laceda",
     size: "50ml",
     category: "men",
     notes: {
@@ -47,9 +53,12 @@ export const products: Product[] = [
   },
   {
     id: "2",
+    sku: "ANGELICA-50",
+    brand: "TAYB Perfumes",
     name: "Angelica 50ml",
     slug: "angelica-50ml",
     price: 4999,
+    family: "angelica",
     size: "50ml",
     category: "women",
     notes: {
@@ -69,9 +78,12 @@ export const products: Product[] = [
   },
   {
     id: "3",
+    sku: "LACEDA-10",
+    brand: "TAYB Perfumes",
     name: "Laceda 10ml",
     slug: "laceda-10ml",
     price: 999,
+    family: "laceda",
     size: "10ml",
     category: "men",
     notes: {
@@ -90,9 +102,12 @@ export const products: Product[] = [
   },
   {
     id: "4",
+    sku: "LACEDA-100",
+    brand: "TAYB Perfumes",
     name: "Laceda 100ml",
     slug: "laceda-100ml",
     price: 7999,
+    family: "laceda",
     size: "100ml",
     category: "men",
     notes: {
@@ -111,9 +126,12 @@ export const products: Product[] = [
   },
   {
     id: "5",
+    sku: "ANGELICA-10",
+    brand: "TAYB Perfumes",
     name: "Angelica 10ml",
     slug: "angelica-10ml",
     price: 999,
+    family: "angelica",
     size: "10ml",
     category: "women",
     notes: {
@@ -132,9 +150,12 @@ export const products: Product[] = [
   },
   {
     id: "6",
+    sku: "ANGELICA-100",
+    brand: "TAYB Perfumes",
     name: "Angelica 100ml",
     slug: "angelica-100ml",
     price: 7999,
+    family: "angelica",
     size: "100ml",
     category: "women",
     notes: {
@@ -153,9 +174,12 @@ export const products: Product[] = [
   },
   {
     id: "7",
+    sku: "ANGELICA-&-LACEDA-50",
+    brand: "TAYB Perfumes",
     name: "Bundle – Angelica & Laceda 50ml",
     slug: "bundle-angelica-laceda-50ml",
     price: 8999,
+    family: "bundle",
     originalPrice: 9998,
     discount: 10,
     size: "2 × 50ml",
@@ -177,9 +201,12 @@ export const products: Product[] = [
   },
   {
     id: "8",
+    sku: "ANGELICA-&-LACEDA-10",
+    brand: "TAYB Perfumes",
     name: "Bundle – Angelica & Laceda 10ml",
     slug: "bundle-angelica-laceda-10ml",
     price: 1799,
+    family: "bundle",
     originalPrice: 1998,
     discount: 10,
     size: "2 × 10ml",
@@ -201,9 +228,13 @@ export const products: Product[] = [
   },
   {
     id: "9",
-    name: "Bundle – Angelica & Laceda 50ml",
-    slug: "bundle-angelica-laceda-50ml",
-    price: 8999,
+    sku: "ANGELICA-&-LACEDA-100",
+    brand: "TAYB Perfumes",
+    name: "Bundle – Angelica & Laceda 100ml",
+    slug: "bundle-gift-set",
+    price: 13999,
+    family: "bundle",
+    originalPrice: 15998,
     size: "Full Collection",
     category: "bundle",
     notes: {
@@ -214,10 +245,10 @@ export const products: Product[] = [
     description: "The complete TAYB experience — a gift they'll never forget.",
     longDescription:
       "Our luxury gift set brings together Angelica 50ml, Laceda 50ml, and two travel-size 10ml companions in a beautifully crafted gift box. The ultimate expression of thoughtful gifting.",
-    image:
-      "https://images.unsplash.com/photo-1549488344-cbb6c34f3b97?w=600&q=80",
+      image:
+      "/bundleperfume.png",
     hoverImage:
-      "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=600&q=80",
+      "/botel.jpg",
     badge: "Best Gift",
     inStock: true,
   },
