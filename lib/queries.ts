@@ -29,3 +29,25 @@ export const blogQuery = groq`
   "author": author->name
 }
 `;
+
+
+export const reviewsQuery = groq`
+*[_type=="review" && approved==true]{
+
+_id,
+
+name,
+city,
+
+productSlug,
+
+rating,
+review,
+
+verifiedPurchase,
+longevity,
+
+"image":photo.asset->url
+
+}
+`;

@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { products, reviews } from "@/lib/data";
-import ProductCard from "@/components/ProductCard";
+import dynamic from "next/dynamic";
+
 import { Shield, Truck, RefreshCw, Sparkles } from "lucide-react";
 
-import dynamic from "next/dynamic";
+import { client } from "@/lib/sanity";
+import { reviewsQuery } from "@/lib/queries";
+
+import { products } from "@/lib/data";
 
 import LazyProductSlider from "@/components/LazyProductSlider";
 
@@ -56,7 +59,7 @@ export const metadata: Metadata = {
     siteName: "TAYB Perfumes",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=1800&q=80",
+        url: "https://taybperfumes.com/og-image.jpg",
         width: 1800,
         height: 1200,
         alt: "TAYB Perfumes Hero",
@@ -69,19 +72,25 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "TAYB Perfumes Pakistan",
     description: "Premium luxury perfumes for men & women in Pakistan.",
-    images: [
-      "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=1800&q=80",
-    ],
+    images: ["https://taybperfumes.com/og-image.jpg"],
   },
   alternates: {
     canonical: "https://taybperfumes.com",
   },
 };
 
-const featuredProducts = products.slice(0, 4);
-const bundles = products.filter((p) => p.category === "bundle");
-
-export default function HomePage() {
+export default async function HomePage() {
+  const reviews = await client.fetch(
+    reviewsQuery,
+    {},
+    {
+      next: {
+        tags: ["reviews"],
+      },
+    },
+  );
+  const featuredProducts = products.slice(0, 4);
+  const bundles = products.filter((p) => p.category === "bundle");
   return (
     <div className="relative">
       {/* ── HERO ── */}
@@ -187,11 +196,11 @@ export default function HomePage() {
 
         <LazyProductSlider products={products.slice(0, 8)} />
       </section>
-     
+
       <HomeBanner />
       <HomeBundles bundles={bundles.slice(0, 2)} />
       <HomeSplitSection />
-      <ReviewsSection reviews={reviews.slice(0, 3)} />
+      <ReviewsSection reviews={reviews} />
       <FounderSection />
     </div>
   );
