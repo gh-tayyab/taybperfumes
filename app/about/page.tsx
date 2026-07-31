@@ -22,6 +22,14 @@ export const metadata: Metadata = {
       "Learn about TAYB Perfumes and our mission to craft luxury fragrances in Pakistan.",
     url: "/about",
     siteName: "TAYB Perfumes",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1800,
+        height: 1200,
+        alt: "TAYB Men's Luxury Perfumes",
+      },
+    ],
     type: "website",
   },
 };

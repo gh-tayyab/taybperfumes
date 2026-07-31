@@ -145,6 +145,7 @@ export default function Footer() {
                 { label: "Contact Us", href: "/contact" },
                 { label: "Blogs", href: "/blogs" },
                 { label: "FAQ", href: "/faq" },
+                { label: "Reviews", href: "/review" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link

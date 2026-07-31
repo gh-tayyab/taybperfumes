@@ -21,8 +21,7 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: "All Perfumes | TAYB Perfumes",
-    description:
-      "Discover premium inspired fragrances for men and women.",
+    description: "Discover premium inspired fragrances for men and women.",
     type: "website",
     url: "https://taybperfumes.com/all",
     siteName: "TAYB Perfumes",
@@ -38,8 +37,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "All Perfumes | TAYB Perfumes",
-    description:
-      "Luxury inspired perfumes for men & women in Pakistan.",
+    description: "Luxury inspired perfumes for men & women in Pakistan.",
     images: ["/og-image.jpg"],
   },
 
@@ -52,32 +50,30 @@ export default function AllPerfumesPage() {
   return (
     <main className="pt-[110px] pb-20">
       <div className="max-w-7xl mx-auto px-6">
-
         <div className="text-center mb-16">
           <p className="text-gold text-xs tracking-[0.35em] uppercase mb-3">
             TAYB PERFUMES
           </p>
 
-          <h1 className="font-display text-5xl md:text-6xl text-cream mb-5">
-            All Perfumes
+          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-cream leading-tight mb-6">
+            All Luxury
+            <span className="block text-gold">Perfumes in Pakistan</span>
           </h1>
 
-          <p className="max-w-2xl mx-auto text-cream/50 leading-7">
-            Discover our complete fragrance collection including men's,
-            women's and bundle offers. Crafted with premium quality oils
-            for exceptional longevity and elegance.
+          <p className="max-w-3xl mx-auto text-cream/60 text-base md:text-lg leading-8">
+            Explore our complete collection of luxury perfumes in Pakistan
+            featuring premium fragrances for men, women and exclusive perfume
+            bundles. Inspired by world-famous scents and crafted with
+            premium-quality ingredients for exceptional longevity, elegance and
+            everyday confidence.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-            />
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
-
       </div>
     </main>
   );

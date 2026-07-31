@@ -18,6 +18,14 @@ export const metadata: Metadata = {
       "Get in touch with TAYB Perfumes for support, fragrance guidance, and order assistance.",
     url: "https://taybperfumes.com/contact",
     siteName: "TAYB Perfumes",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1800,
+        height: 1200,
+        alt: "TAYB Perfumes Blog",
+      },
+    ],
     locale: "en_PK",
     type: "website",
   },

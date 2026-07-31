@@ -17,6 +17,14 @@ export const metadata: Metadata = {
       "View TAYB Perfumes return and exchange policy for secure fragrance shopping in Pakistan.",
     url: "https://taybperfumes.com/returns",
     siteName: "TAYB Perfumes",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1800,
+        height: 1200,
+        alt: "TAYB Perfumes Blog",
+      },
+    ],
     locale: "en_PK",
     type: "website",
   },

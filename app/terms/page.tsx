@@ -17,6 +17,14 @@ export const metadata: Metadata = {
       "Review TAYB Perfumes website terms and conditions for secure fragrance shopping in Pakistan.",
     url: "https://taybperfumes.com/terms",
     siteName: "TAYB Perfumes",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1800,
+        height: 1200,
+        alt: "TAYB Men's Luxury Perfumes",
+      },
+    ],
     locale: "en_PK",
     type: "website",
   },

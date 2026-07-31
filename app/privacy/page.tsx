@@ -17,6 +17,14 @@ export const metadata: Metadata = {
       "Understand how TAYB Perfumes protects your personal data and privacy while shopping online.",
     url: "https://taybperfumes.com/privacy",
     siteName: "TAYB Perfumes",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1800,
+        height: 1200,
+        alt: "TAYB Perfumes Blog",
+      },
+    ],
     locale: "en_PK",
     type: "website",
   },

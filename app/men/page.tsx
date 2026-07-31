@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "TAYB Perfumes",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1541643600914-78b084683702?w=1800&q=80",
+        url: "/og-image.jpg",
         width: 1800,
         height: 1200,
         alt: "TAYB Men's Luxury Perfumes",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description:
       "Explore bold and premium long-lasting fragrances for men by TAYB Perfumes.",
     images: [
-      "https://images.unsplash.com/photo-1541643600914-78b084683702?w=1800&q=80",
+      "/og-image.jpg",
     ],
   },
   alternates: {
@@ -53,7 +53,7 @@ export default function MenPage() {
   return (
     <div className="pt-[52px]">
       {/* Hero */}
-      <section className="relative h-[50vh] overflow-hidden">
+      <section className="relative min-h-[70vh] overflow-hidden">
         <Image
           src="/menhero.png"
           alt="Men's Fragrances"
@@ -63,15 +63,19 @@ export default function MenPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/40 to-charcoal" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4">
+          {/* <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4">
             For Him
-          </p>
-          <h1 className="font-display text-6xl md:text-8xl text-cream italic">
-            Men
+          </p> */}
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-cream italic leading-tight max-w-5xl px-6">
+            Men's Luxury
+            <span className="block text-gold">Perfumes</span>
           </h1>
-          <p className="text-cream/50 text-sm tracking-wider mt-4 max-w-sm">
-            Bold. Commanding. Unmistakable. Fragrances built for men who leave
-            an impression.
+          <p className="text-cream/60 text-sm md:text-lg leading-relaxed mt-6 max-w-2xl px-6">
+            Explore premium luxury perfumes for men in Pakistan inspired by
+            world-famous fragrances. Designed with exceptional longevity,
+            refined scent profiles and premium-quality ingredients for everyday
+            confidence. Perfect for the office, weddings, casual wear and formal
+            occasions.
           </p>
         </div>
       </section>

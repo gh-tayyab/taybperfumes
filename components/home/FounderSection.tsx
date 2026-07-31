@@ -35,7 +35,7 @@ const FounderSection = () => {
             </p>
           </div>
         </div>
-      // </section> 
+      </section> 
   )
 }
 

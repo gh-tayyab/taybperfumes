@@ -1,47 +1,51 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-
+import { faqs } from "@/lib/faqs";
 export const metadata: Metadata = {
   title: "FAQ | TAYB Perfumes Pakistan",
   description:
     "Frequently asked questions about TAYB Perfumes. Learn about delivery, returns, exchanges, authenticity, long-lasting fragrances, and orders across Pakistan.",
+  keywords: [
+    "perfume bundles pakistan",
+    "luxury perfume bundle",
+    "tayb perfumes",
+    "fragrance gift set pakistan",
+    "men perfume bundle",
+    "women perfume bundle",
+    "best perfume deals pakistan",
+  ],
+  openGraph: {
+    title: "Luxury Perfume Bundles Pakistan | TAYB Perfumes",
+    description:
+      "Discover TAYB signature perfume bundles. Premium long-lasting fragrances with exclusive savings across Pakistan.",
+    url: "https://taybperfumes.com/faq",
+    siteName: "TAYB Perfumes",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1800,
+        height: 1200,
+        alt: "TAYB Perfume Bundles",
+      },
+    ],
+    locale: "en_PK",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Luxury Perfume Bundles Pakistan | TAYB Perfumes",
+    description:
+      "Shop premium TAYB fragrance bundles and save 10% on long-lasting luxury perfumes.",
+    images: [
+      "/og-image.jpg",
+    ],
+  },
+  alternates: {
+    canonical: "https://taybperfumes.com/faq",
+  },
 };
 
-const faqs = [
-  {
-    q: "Are TAYB perfumes original?",
-    a: "Yes. Every TAYB fragrance is crafted using premium-quality ingredients and carefully blended for authenticity, elegance, and long-lasting performance.",
-  },
-  {
-    q: "How long do TAYB perfumes last?",
-    a: "Our perfumes typically last 8–12+ hours depending on skin type, environment, and application method.",
-  },
-  {
-    q: "Do you deliver all over Pakistan?",
-    a: "Yes. We offer nationwide delivery across Pakistan with secure packaging and reliable shipping partners.",
-  },
-  {
-    q: "How long does delivery take?",
-    a: "Orders usually arrive within 3–5 working days depending on your city and courier service availability.",
-  },
-  {
-    q: "Can I return or exchange my perfume?",
-    a: "Yes. We offer easy exchanges for damaged or incorrect items. Contact our support team within 48 hours of delivery.",
-  },
-  {
-    q: "Do you offer bundle discounts?",
-    a: "Yes. Our exclusive perfume bundles offer savings and are available for a limited time.",
-  },
-  {
-    q: "Which perfume is best for men?",
-    a: "Our signature men's fragrance Laceda is a bold blend of cedarwood, amber, and musk designed for confidence and elegance.",
-  },
-  {
-    q: "Which perfume is best for women?",
-    a: "Angelica is our signature women's fragrance featuring soft florals, musk, and sandalwood for timeless sophistication.",
-  },
-];
 
 export default function FAQPage() {
   return (

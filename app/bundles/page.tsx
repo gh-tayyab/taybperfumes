@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "TAYB Perfumes",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=1800&q=80",
+        url: "/og-image.jpg",
         width: 1800,
         height: 1200,
         alt: "TAYB Perfume Bundles",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description:
       "Shop premium TAYB fragrance bundles and save 10% on long-lasting luxury perfumes.",
     images: [
-      "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=1800&q=80",
+      "/og-image.jpg",
     ],
   },
   alternates: {
@@ -52,7 +52,7 @@ const bundleProducts = products.filter((p) => p.category === "bundle");
 export default function BundlesPage() {
   return (
     <div className="pt-[52px]">
-      <section className="relative h-[50vh] overflow-hidden">
+      <section className="relative min-h-[70vh] overflow-hidden">
         <Image
           src="/bundlehero.png"
           alt="Luxury perfume bundles by TAYB Perfumes in Pakistan"
@@ -62,14 +62,18 @@ export default function BundlesPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/40 to-charcoal" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4">
+          {/* <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4">
             Save More
-          </p>
-          <h1 className="font-display text-6xl md:text-8xl text-cream italic">
-            Bundles
+          </p> */}
+          <h1 className="font-display text-5xl md:text-7xl italic leading-tight max-w-5xl">
+            Luxury Perfume
+            <span className="block text-gold">Bundles in Pakistan</span>
           </h1>
-          <p className="text-cream/50 text-sm tracking-wider mt-4 max-w-sm">
-            Get both signature scents and save 10% on every bundle.
+          <p className="mt-6 max-w-2xl text-sm md:text-lg leading-8 text-cream/60">
+            Explore premium luxury perfume bundles in Pakistan featuring our
+            signature fragrances for men and women. Enjoy exceptional value,
+            long-lasting scents and exclusive bundle savings for gifting or your
+            personal collection.
           </p>
         </div>
       </section>

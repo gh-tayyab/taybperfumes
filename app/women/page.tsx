@@ -20,6 +20,14 @@ export const metadata: Metadata = {
       "Discover elegant, long-lasting luxury fragrances for women by TAYB Perfumes.",
     url: "https://taybperfumes.com/women",
     siteName: "TAYB Perfumes",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1800,
+        height: 1200,
+        alt: "TAYB Men's Luxury Perfumes",
+      },
+    ],
     locale: "en_PK",
     type: "website",
   },
@@ -38,7 +46,7 @@ export default function WomenPage() {
   return (
     <div className="pt-[52px]">
       {/* Hero */}
-      <section className="relative h-[50vh] overflow-hidden">
+      <section className="relative min-h-[70vh] overflow-hidden">
         <Image
           src="/womenhero.png"
           alt="Women's Fragrances"
@@ -50,18 +58,21 @@ export default function WomenPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/40 to-charcoal" />
 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4">
+          {/* <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4">
             For Her
-          </p>
+          </p> */}
 
-          <h1 className="font-display text-6xl md:text-8xl text-cream italic">
-            Women
-          </h1>
+          <h1 className="font-display text-5xl md:text-7xl italic text-cream leading-tight">
+      Women's Luxury
+      <span className="block text-gold">Perfumes</span>
+    </h1>
 
-          <p className="text-cream/50 text-sm tracking-wider mt-4 max-w-sm">
-            Delicate. Timeless. Deeply feminine. Fragrances that bloom on your
-            skin and stay.
-          </p>
+    <p className="mt-6 max-w-2xl text-sm md:text-lg leading-8 text-cream/60">
+      Explore premium luxury perfumes for women in Pakistan inspired by
+      world-famous fragrances. Discover elegant, long-lasting scents crafted
+      with premium ingredients for everyday wear, weddings, formal occasions
+      and unforgettable moments.
+    </p>
         </div>
       </section>
 

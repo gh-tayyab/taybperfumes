@@ -17,6 +17,7 @@ const CartDrawer = dynamic(() => import("@/components/CartDrawer"), {
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://taybperfumes.com";
+
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -42,11 +43,26 @@ export const metadata: Metadata = {
 
   description:
     "Buy premium luxury perfumes in Pakistan from TAYB Perfumes. Discover long-lasting fragrances for men & women inspired by world-famous scents. Fast delivery across Pakistan.",
+
+  applicationName: "TAYB Perfumes",
+  creator: "TAYB Perfumes",
+  publisher: "TAYB Perfumes",
+  category: "Shopping",
+  classification: "Luxury Perfumes",
+
+  authors: [
+    {
+      name: "TAYB Perfumes",
+      url: siteUrl,
+    },
+  ],
+
   verification: {
     other: {
       "msvalidate.01": "3C96E0C8D61864A3B5F0C3DD4D5373F5",
     },
   },
+
   keywords: [
     "TAYB Perfumes",
     "Perfumes Pakistan",
@@ -62,6 +78,11 @@ export const metadata: Metadata = {
 
   alternates: {
     canonical: siteUrl,
+  },
+
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 
   openGraph: {
@@ -92,7 +113,48 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "TAYB Perfumes",
+  url: siteUrl,
+  logo: `${siteUrl}/logo.png`,
+  image: `${siteUrl}/og-image.jpg`,
+  description:
+    "Premium luxury perfumes for men and women in Pakistan inspired by world-famous fragrances.",
+  email: "info@taybperfumes.com",
+  telephone: "+923367189237",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "PK",
+  },
+  sameAs: [
+    "https://www.facebook.com/profile.php?id=61591221246286",
+    "https://www.instagram.com/taybperfumes",
+  ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "TAYB Perfumes",
+  url: siteUrl,
+  publisher: {
+    "@type": "Organization",
+    name: "TAYB Perfumes",
+  },
+  inLanguage: "en-PK",
 };
 
 export default function RootLayout({
@@ -106,6 +168,20 @@ export default function RootLayout({
         className={`${cormorant.variable} ${jost.variable} grain bg-charcoal text-cream`}
       >
         <GTM />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
+
         <a href="#main-content" className="sr-only focus:not-sr-only">
           Skip to content
         </a>
@@ -116,6 +192,7 @@ export default function RootLayout({
           <CartDrawer />
 
           <main id="main-content">{children}</main>
+
           <FloatingSocial />
           <Footer />
         </CartProvider>

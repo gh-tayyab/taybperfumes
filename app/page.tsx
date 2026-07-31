@@ -23,6 +23,12 @@ const HomeBanner = dynamic(() => import("@/components/home/HomeBanner"), {
 const HomeBundles = dynamic(() => import("@/components/home/HomeBundles"), {
   loading: () => <div className="h-[700px]" />,
 });
+const HomeSEOContent = dynamic(
+  () => import("@/components/home/HomeSEOContent"),
+  {
+    loading: () => <div className="h-[900px]" />,
+  },
+);
 
 const HomeSplitSection = dynamic(
   () => import("@/components/home/HomeSplitSection"),
@@ -202,6 +208,7 @@ export default async function HomePage() {
       <HomeSplitSection />
       <ReviewsSection reviews={reviews} />
       <FounderSection />
+      <HomeSEOContent />
     </div>
   );
 }
