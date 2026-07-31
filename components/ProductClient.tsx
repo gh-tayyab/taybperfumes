@@ -358,7 +358,51 @@ export default function ProductClient({ product }: Props) {
           </div>
         </div>
       </div>
-      
+      {/* FAQ */}
+      <section className="max-w-5xl mx-auto px-6 py-20 border-t border-gold/10">
+        <div className="text-center mb-12">
+          <p className="text-gold text-xs tracking-[0.35em] uppercase mb-3">
+            Frequently Asked Questions
+          </p>
+
+          <h2 className="font-display text-4xl text-cream">
+            Everything You Need to Know
+          </h2>
+        </div>
+
+        <div className="space-y-4">
+          {[
+            {
+              q: `How long does ${product.name} last?`,
+              a: `${product.name} offers long-lasting performance. Most customers experience 8–12 hours depending on skin type, weather and application.`,
+            },
+            {
+              q: "Is this perfume suitable for daily wear?",
+              a: "Yes. It is designed for everyday use as well as special occasions.",
+            },
+            {
+              q: "Is Cash on Delivery available?",
+              a: "Yes. We offer Cash on Delivery across Pakistan.",
+            },
+            {
+              q: "How long does delivery take?",
+              a: "Orders are usually delivered within 2–4 working days across Pakistan.",
+            },
+            {
+              q: "Is this an original TAYB fragrance?",
+              a: "Yes. Every perfume is crafted by TAYB Perfumes using premium quality fragrance oils.",
+            },
+          ].map((faq, index) => (
+            <details key={index} className="border border-gold/20 p-5">
+              <summary className="cursor-pointer font-medium text-cream">
+                {faq.q}
+              </summary>
+
+              <p className="mt-4 text-sm leading-7 text-cream/60">{faq.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
       {/* Related Products */}
       {related.length > 0 && (
         <section className="max-w-7xl mx-auto px-6 py-20 border-t border-gold/10">

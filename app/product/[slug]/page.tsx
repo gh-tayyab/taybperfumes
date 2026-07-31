@@ -158,6 +158,39 @@ export default function ProductPage({ params }: Props) {
       },
     ],
   };
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: `How long does ${product.name} last?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${product.name} typically lasts between 8 and 12 hours depending on skin type and environment.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is Cash on Delivery available?",
+
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Cash on Delivery is available throughout Pakistan.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How long does delivery take?",
+
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Orders are generally delivered within 2–4 working days.",
+        },
+      },
+    ],
+  };
   return (
     <>
       <script
@@ -171,6 +204,12 @@ export default function ProductPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbLd),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqLd),
         }}
       />
 
