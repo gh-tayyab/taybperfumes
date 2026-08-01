@@ -50,8 +50,36 @@ export const metadata: Metadata = {
 const bundleProducts = products.filter((p) => p.category === "bundle");
 
 export default function BundlesPage() {
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+  
+    name: "Luxury Perfume Bundles",
+  
+    url: "https://taybperfumes.com/bundles",
+  
+    mainEntity: {
+      "@type": "ItemList",
+  
+      itemListElement: bundleProducts.map((product, index) => ({
+        "@type": "ListItem",
+  
+        position: index + 1,
+  
+        url: `https://taybperfumes.com/product/${product.slug}`,
+  
+        name: product.name,
+      })),
+    },
+  };
   return (
     <div className="pt-[52px]">
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(collectionSchema),
+  }}
+/>
       <section className="relative min-h-[70vh] overflow-hidden">
         <Image
           src="/bundlehero.png"

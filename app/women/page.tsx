@@ -43,8 +43,36 @@ export const metadata: Metadata = {
 const womenProducts = products.filter((p) => p.category === "women");
 
 export default function WomenPage() {
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+  
+    name: "Women's Luxury Perfumes",
+  
+    url: "https://taybperfumes.com/women",
+  
+    mainEntity: {
+      "@type": "ItemList",
+  
+      itemListElement: womenProducts.map((product, index) => ({
+        "@type": "ListItem",
+  
+        position: index + 1,
+  
+        url: `https://taybperfumes.com/product/${product.slug}`,
+  
+        name: product.name,
+      })),
+    },
+  };
   return (
     <div className="pt-[52px]">
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(collectionSchema),
+  }}
+/>
       {/* Hero */}
       <section className="relative min-h-[70vh] overflow-hidden">
         <Image

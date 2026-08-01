@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { products } from "@/lib/data";
 import { client } from "@/lib/sanity";
-import { productReviewsQuery } from "@/lib/queries";
+import { productReviewsQuery, relatedBlogsQuery } from "@/lib/queries";
 import ProductClient from "@/components/ProductClient";
 
 interface Props {
@@ -87,6 +87,17 @@ export default async function ProductPage({ params }: Props) {
         tags: ["reviews"],
       },
     },
+  );
+  const relatedBlogs = await client.fetch(
+    relatedBlogsQuery,
+    {
+      category: product.category,
+    },
+    {
+      next: {
+        tags: ["blogs"],
+      },
+    }
   );
 
   const reviewCount = reviews.length;
@@ -238,7 +249,7 @@ export default async function ProductPage({ params }: Props) {
         }}
       />
 
-      <ProductClient product={product} reviews={reviews} />
+      <ProductClient product={product} reviews={reviews}  relatedBlogs={relatedBlogs} />
     </>
   );
 }

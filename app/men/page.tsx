@@ -38,9 +38,7 @@ export const metadata: Metadata = {
     title: "Men's Luxury Perfumes | TAYB Perfumes",
     description:
       "Explore bold and premium long-lasting fragrances for men by TAYB Perfumes.",
-    images: [
-      "/og-image.jpg",
-    ],
+    images: ["/og-image.jpg"],
   },
   alternates: {
     canonical: "https://taybperfumes.com/men",
@@ -50,8 +48,36 @@ export const metadata: Metadata = {
 const menProducts = products.filter((p) => p.category === "men");
 
 export default function MenPage() {
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+
+    name: "Men's Luxury Perfumes",
+
+    url: "https://taybperfumes.com/men",
+
+    mainEntity: {
+      "@type": "ItemList",
+
+      itemListElement: menProducts.map((product, index) => ({
+        "@type": "ListItem",
+
+        position: index + 1,
+
+        url: `https://taybperfumes.com/product/${product.slug}`,
+
+        name: product.name,
+      })),
+    },
+  };
   return (
     <div className="pt-[52px]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(collectionSchema),
+        }}
+      />
       {/* Hero */}
       <section className="relative min-h-[70vh] overflow-hidden">
         <Image

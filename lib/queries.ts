@@ -74,3 +74,40 @@ export const productReviewsQuery = groq`
   "image": photo.asset->url
 }
 `;
+
+
+export const relatedBlogsQuery = groq`
+*[
+  _type == "blog" &&
+  productCategory == $category
+]
+| order(publishedAt desc)[0...3]{
+
+  _id,
+  title,
+  slug,
+  excerpt,
+  "image": mainImage.asset->url
+}
+`;
+
+export const featuredBlogsQuery = groq`
+*[
+  _type == "blog" &&
+  featured == true
+]
+| order(publishedAt desc)[0...3]{
+
+  _id,
+
+  title,
+
+  slug,
+
+  excerpt,
+
+  publishedAt,
+
+  "image": mainImage.asset->url
+}
+`;

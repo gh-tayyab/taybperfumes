@@ -23,10 +23,15 @@ interface Review {
 
 interface Props {
   product: Product;
-  reviews: Review[];
+  reviews: any[];
+  relatedBlogs: any[];
 }
 
-export default function ProductClient({ product, reviews }: Props) {
+export default function ProductClient({
+  product,
+  reviews,
+  relatedBlogs,
+}: Props) {
   const { addToCart } = useCart();
   const router = useRouter();
 
@@ -437,101 +442,83 @@ export default function ProductClient({ product, reviews }: Props) {
       </section>
 
       {reviews.length > 0 && (
-  <section className="max-w-7xl mx-auto px-6 py-20 border-t border-gold/10">
-    <div className="mb-12">
-      <p className="text-gold text-xs tracking-[0.35em] uppercase mb-3">
-        Customer Reviews
-      </p>
+        <section className="max-w-7xl mx-auto px-6 py-20 border-t border-gold/10">
+          <div className="mb-12">
+            <p className="text-gold text-xs tracking-[0.35em] uppercase mb-3">
+              Customer Reviews
+            </p>
 
-      <h2 className="font-display text-4xl text-cream mb-3">
-        What Customers Say
-      </h2>
+            <h2 className="font-display text-4xl text-cream mb-3">
+              What Customers Say
+            </h2>
 
-      <div className="flex items-center gap-3">
-        <div className="flex gap-1">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star
-              key={i}
-              size={16}
-              className="fill-gold text-gold"
-            />
-          ))}
-        </div>
-
-        <span className="text-gold font-medium">
-          {averageRating}
-        </span>
-
-        <span className="text-cream/40">
-          ({reviewCount} Reviews)
-        </span>
-      </div>
-    </div>
-
-    <div className="grid gap-6 md:grid-cols-2">
-      {reviews.map((review) => (
-        <div
-          key={review._id}
-          className="border border-gold/10 bg-[#161616] p-6"
-        >
-          <div className="flex items-start justify-between mb-5">
-            <div className="flex items-center gap-4">
-              {review.image ? (
-                <Image
-                  src={review.image}
-                  alt={review.name}
-                  width={56}
-                  height={56}
-                  className="rounded-full object-cover"
-                />
-              ) : (
-                <div className="w-14 h-14 rounded-full bg-gold/20 flex items-center justify-center text-gold font-semibold">
-                  {review.name.charAt(0)}
-                </div>
-              )}
-
-              <div>
-                <h3 className="text-cream font-medium">
-                  {review.name}
-                </h3>
-
-                <p className="text-xs text-cream/40">
-                  {review.city}
-                </p>
+            <div className="flex items-center gap-3">
+              <div className="flex gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={16} className="fill-gold text-gold" />
+                ))}
               </div>
-            </div>
 
-            {review.verifiedPurchase && (
-              <span className="bg-green-600/20 text-green-400 text-[10px] uppercase tracking-wider px-3 py-1 rounded-full">
-                Verified Purchase
-              </span>
-            )}
+              <span className="text-gold font-medium">{averageRating}</span>
+
+              <span className="text-cream/40">({reviewCount} Reviews)</span>
+            </div>
           </div>
 
-          <div className="flex gap-1 mb-4">
-            {Array.from({ length: review.rating }).map((_, i) => (
-              <Star
-                key={i}
-                size={15}
-                className="fill-gold text-gold"
-              />
+          <div className="grid gap-6 md:grid-cols-2">
+            {reviews.map((review) => (
+              <div
+                key={review._id}
+                className="border border-gold/10 bg-[#161616] p-6"
+              >
+                <div className="flex items-start justify-between mb-5">
+                  <div className="flex items-center gap-4">
+                    {review.image ? (
+                      <Image
+                        src={review.image}
+                        alt={review.name}
+                        width={56}
+                        height={56}
+                        className="rounded-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-14 h-14 rounded-full bg-gold/20 flex items-center justify-center text-gold font-semibold">
+                        {review.name.charAt(0)}
+                      </div>
+                    )}
+
+                    <div>
+                      <h3 className="text-cream font-medium">{review.name}</h3>
+
+                      <p className="text-xs text-cream/40">{review.city}</p>
+                    </div>
+                  </div>
+
+                  {review.verifiedPurchase && (
+                    <span className="bg-green-600/20 text-green-400 text-[10px] uppercase tracking-wider px-3 py-1 rounded-full">
+                      Verified Purchase
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: review.rating }).map((_, i) => (
+                    <Star key={i} size={15} className="fill-gold text-gold" />
+                  ))}
+                </div>
+
+                {review.longevity && (
+                  <p className="text-gold text-xs uppercase tracking-wider mb-3">
+                    Longevity: {review.longevity}
+                  </p>
+                )}
+
+                <p className="text-cream/60 leading-7">{review.review}</p>
+              </div>
             ))}
           </div>
-
-          {review.longevity && (
-            <p className="text-gold text-xs uppercase tracking-wider mb-3">
-              Longevity: {review.longevity}
-            </p>
-          )}
-
-          <p className="text-cream/60 leading-7">
-            {review.review}
-          </p>
-        </div>
-      ))}
-    </div>
-  </section>
-)}
+        </section>
+      )}
 
       {/* Related Products */}
       {related.length > 0 && (
@@ -559,6 +546,46 @@ export default function ProductClient({ product, reviews }: Props) {
             {related.map((item) => (
               <ProductCard key={item.id} product={item} />
             ))}
+          </div>
+        </section>
+      )}
+
+      {relatedBlogs.length > 0 && (
+        <section className="max-w-7xl mx-auto px-6 py-20 border-t border-gold/10">
+          <h2 className="font-display text-3xl text-cream mb-10">
+            Related Articles
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {relatedBlogs.map((blog: any) => (
+              <Link
+                key={blog._id}
+                href={`/blogs/${blog.slug.current}`}
+                className="border border-gold/10 hover:border-gold transition"
+              >
+                <Image
+                  src={blog.image}
+                  alt={blog.title}
+                  width={600}
+                  height={400}
+                  className="w-full h-56 object-cover"
+                />
+
+                <div className="p-5">
+                  <h3 className="text-xl text-cream mb-3">{blog.title}</h3>
+
+                  <p className="text-cream/60 text-sm">{blog.excerpt}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="flex justify-center mt-8">
+            <Link
+              href="/blogs"
+              className="border border-gold px-6 py-3 text-gold hover:bg-gold hover:text-charcoal transition"
+            >
+              View All Articles
+            </Link>
           </div>
         </section>
       )}

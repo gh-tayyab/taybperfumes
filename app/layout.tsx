@@ -167,6 +167,30 @@ export default function RootLayout({
       <body
         className={`${cormorant.variable} ${jost.variable} grain bg-charcoal text-cream`}
       >
+        <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+
+      name: "TAYB Perfumes",
+
+      url: "https://taybperfumes.com",
+
+      logo: "https://taybperfumes.com/logo.png",
+
+      email: "info@taybperfumes.com",
+
+      telephone: "+923367189237",
+
+      sameAs: [
+        "https://facebook.com/profile.php?id=61591221246286",
+        "https://instagram.com/taybperfumes",
+      ],
+    }),
+  }}
+/>
         <GTM />
         <script
           type="application/ld+json"

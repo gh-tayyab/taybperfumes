@@ -26,7 +26,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: "This blog could not be found.",
     };
   }
-  console.log("BLOG DATA:", blog);
 
   return {
     title: blog.metaTitle || blog.title,

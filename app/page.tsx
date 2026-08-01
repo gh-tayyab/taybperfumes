@@ -7,7 +7,7 @@ import { Shield, Truck, RefreshCw, Sparkles } from "lucide-react";
 
 import { client } from "@/lib/sanity";
 import { reviewsQuery } from "@/lib/queries";
-
+import { featuredBlogsQuery } from "@/lib/queries";
 import { products } from "@/lib/data";
 
 import LazyProductSlider from "@/components/LazyProductSlider";
@@ -86,6 +86,59 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+
+    name: "TAYB Perfumes",
+
+    url: "https://taybperfumes.com",
+
+    logo: "https://taybperfumes.com/logo.png",
+
+    sameAs: [
+      "https://www.facebook.com/profile.php?id=61591221246286",
+      "https://instagram.com/taybperfumes",
+    ],
+    description: "Premium luxury perfumes for men and women in Pakistan.",
+
+    foundingLocation: {
+      "@type": "Country",
+      name: "Pakistan",
+    },
+
+    areaServed: {
+      "@type": "Country",
+      name: "Pakistan",
+    },
+
+    contactPoint: {
+      "@type": "ContactPoint",
+
+      telephone: "+923367189237",
+      email: "info@taybperfumes.com",
+
+      contactType: "customer service",
+
+      areaServed: "PK",
+
+      availableLanguage: ["English", "Urdu"],
+    },
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+
+    name: "TAYB Perfumes",
+
+    url: "https://taybperfumes.com",
+
+    publisher: {
+      "@type": "Organization",
+      name: "TAYB Perfumes",
+    },
+  };
   const reviews = await client.fetch(
     reviewsQuery,
     {},
@@ -95,120 +148,244 @@ export default async function HomePage() {
       },
     },
   );
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+
+    name: "TAYB Perfumes Pakistan",
+
+    url: "https://taybperfumes.com",
+
+    description:
+      "Premium luxury perfumes for men & women in Pakistan. Discover long-lasting fragrances inspired by world-famous scents.",
+
+    inLanguage: "en-PK",
+
+    isPartOf: {
+      "@type": "WebSite",
+      name: "TAYB Perfumes",
+      url: "https://taybperfumes.com",
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+
+    "@type": "BreadcrumbList",
+
+    itemListElement: [
+      {
+        "@type": "ListItem",
+
+        position: 1,
+
+        name: "Home",
+
+        item: "https://taybperfumes.com",
+      },
+    ],
+  };
   const featuredProducts = products.slice(0, 4);
   const bundles = products.filter((p) => p.category === "bundle");
+  const featuredBlogs = await client.fetch(
+    featuredBlogsQuery,
+    {},
+    {
+      next: {
+        tags: ["blogs"],
+      },
+    },
+  );
   return (
-    <div className="relative">
-      {/* ── HERO ── */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/bundleperfume.png"
-            alt="TAYB Perfumes Hero"
-            fill
-            priority
-            fetchPriority="high"
-            quality={70}
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/70 to-transparent" />
-        </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageSchema),
+        }}
+      />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-2 mb-6 fade-in-up fade-in-up-delay-1">
-              <div className="h-[1px] w-10 bg-gold" />
-              <span className="font-body text-xs tracking-[0.3em] uppercase text-gold">
-                Pakistan&apos;s Finest Luxury Fragrance
-              </span>
-            </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationSchema),
+        }}
+      />
 
-            <h1 className="font-display text-6xl md:text-8xl leading-none text-cream mb-6 fade-in-up fade-in-up-delay-2">
-              Your
-              <em className="block text-gold"> Signature</em>
-              Scent.
-            </h1>
-
-            <p className="font-body text-cream/60 text-lg max-w-md leading-relaxed mb-10 fade-in-up fade-in-up-delay-3">
-              Crafted with bold blends and clean ingredients. Long-lasting
-              luxury fragrances that make a statement — and keep it.
-            </p>
-
-            <div className="flex flex-wrap gap-4 fade-in-up fade-in-up-delay-4">
-              <Link
-                href="/women"
-                className="bg-gold text-charcoal font-body font-medium tracking-widest uppercase text-xs px-8 py-4 hover:bg-gold-light transition-colors duration-300"
-              >
-                Shop Women
-              </Link>
-              <Link
-                href="/men"
-                className="border border-cream/30 text-cream font-body font-medium tracking-widest uppercase text-xs px-8 py-4 hover:border-gold hover:text-gold transition-colors duration-300"
-              >
-                Shop Men
-              </Link>
-            </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteSchema),
+        }}
+      />
+      <div className="relative">
+        {/* ── HERO ── */}
+        <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+          <div className="absolute inset-0">
+            <Image
+              src="/bundleperfume.png"
+              alt="TAYB Perfumes Hero"
+              fill
+              priority
+              fetchPriority="high"
+              quality={70}
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/70 to-transparent" />
           </div>
-        </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-          <span className="text-xs tracking-widest uppercase text-cream">
-            Scroll
-          </span>
-          <div className="w-[1px] h-12 bg-gradient-to-b from-cream to-transparent animate-pulse" />
-        </div>
-      </section>
-
-      {/* ── TRUST BADGES ── */}
-      <section className="border-y border-gold/10 py-6">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 justify-items-center gap-6">
-            {[
-              { icon: <Sparkles size={18} />, label: "Long-Lasting 12+ Hours" },
-              { icon: <Shield size={18} />, label: "100% Authentic" },
-              { icon: <Truck size={18} />, label: "Free Delivery on 3K+" },
-              { icon: <RefreshCw size={18} />, label: "Easy Returns" },
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-3 text-cream/50">
-                <span className="text-gold">{item.icon}</span>
-                <span className="font-body text-xs tracking-wider uppercase">
-                  {item.label}
+          <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-2 mb-6 fade-in-up fade-in-up-delay-1">
+                <div className="h-[1px] w-10 bg-gold" />
+                <span className="font-body text-xs tracking-[0.3em] uppercase text-gold">
+                  Pakistan&apos;s Finest Luxury Fragrance
                 </span>
               </div>
+
+              <h1 className="font-display text-6xl md:text-8xl leading-none text-cream mb-6 fade-in-up fade-in-up-delay-2">
+                Your
+                <em className="block text-gold"> Signature</em>
+                Scent.
+              </h1>
+
+              <p className="font-body text-cream/60 text-lg max-w-md leading-relaxed mb-10 fade-in-up fade-in-up-delay-3">
+                Crafted with bold blends and clean ingredients. Long-lasting
+                luxury fragrances that make a statement — and keep it.
+              </p>
+
+              <div className="flex flex-wrap gap-4 fade-in-up fade-in-up-delay-4">
+                <Link
+                  href="/women"
+                  className="bg-gold text-charcoal font-body font-medium tracking-widest uppercase text-xs px-8 py-4 hover:bg-gold-light transition-colors duration-300"
+                >
+                  Shop Women
+                </Link>
+                <Link
+                  href="/men"
+                  className="border border-cream/30 text-cream font-body font-medium tracking-widest uppercase text-xs px-8 py-4 hover:border-gold hover:text-gold transition-colors duration-300"
+                >
+                  Shop Men
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+            <span className="text-xs tracking-widest uppercase text-cream">
+              Scroll
+            </span>
+            <div className="w-[1px] h-12 bg-gradient-to-b from-cream to-transparent animate-pulse" />
+          </div>
+        </section>
+
+        {/* ── TRUST BADGES ── */}
+        <section className="border-y border-gold/10 py-6">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 justify-items-center gap-6">
+              {[
+                {
+                  icon: <Sparkles size={18} />,
+                  label: "Long-Lasting 12+ Hours",
+                },
+                { icon: <Shield size={18} />, label: "100% Authentic" },
+                { icon: <Truck size={18} />, label: "Free Delivery on 3K+" },
+                { icon: <RefreshCw size={18} />, label: "Easy Returns" },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-3 text-cream/50">
+                  <span className="text-gold">{item.icon}</span>
+                  <span className="font-body text-xs tracking-wider uppercase">
+                    {item.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── SHOP ALL ── */}
+        <section className="py-20 max-w-7xl mx-auto px-6">
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">
+                Explore
+              </p>
+              <h2 className="font-display text-4xl md:text-5xl text-cream">
+                Shop All
+              </h2>
+            </div>
+            <Link
+              href="/all"
+              className="hidden md:flex items-center gap-2 text-xs tracking-widest uppercase text-cream/40 hover:text-gold transition-colors"
+            >
+              View All <span>→</span>
+            </Link>
+          </div>
+
+          <LazyProductSlider products={products.slice(0, 8)} />
+        </section>
+
+        <HomeBanner />
+        <HomeBundles bundles={bundles.slice(0, 2)} />
+        <HomeSplitSection />
+        <ReviewsSection reviews={reviews} />
+        <FounderSection />
+        <section className="max-w-7xl mx-auto px-6 py-20">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">
+                Learn
+              </p>
+
+              <h2 className="font-display text-4xl text-cream">
+                Latest Articles
+              </h2>
+            </div>
+
+            <Link
+              href="/blogs"
+              className="text-xs tracking-widest uppercase text-cream/50 hover:text-gold transition"
+            >
+              View All →
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {featuredBlogs.map((blog: any) => (
+              <Link
+                key={blog._id}
+                href={`/blogs/${blog.slug.current}`}
+                className="group"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden mb-5">
+                  <Image
+                    src={blog.image}
+                    alt={blog.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition duration-500"
+                  />
+                </div>
+
+                <h3 className="text-xl text-cream font-display mb-3 group-hover:text-gold transition">
+                  {blog.title}
+                </h3>
+
+                <p className="text-sm text-cream/60 line-clamp-3">
+                  {blog.excerpt}
+                </p>
+              </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── SHOP ALL ── */}
-      <section className="py-20 max-w-7xl mx-auto px-6">
-        <div className="flex items-end justify-between mb-12">
-          <div>
-            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2">
-              Explore
-            </p>
-            <h2 className="font-display text-4xl md:text-5xl text-cream">
-              Shop All
-            </h2>
-          </div>
-          <Link
-            href="/all"
-            className="hidden md:flex items-center gap-2 text-xs tracking-widest uppercase text-cream/40 hover:text-gold transition-colors"
-          >
-            View All <span>→</span>
-          </Link>
-        </div>
-
-        <LazyProductSlider products={products.slice(0, 8)} />
-      </section>
-
-      <HomeBanner />
-      <HomeBundles bundles={bundles.slice(0, 2)} />
-      <HomeSplitSection />
-      <ReviewsSection reviews={reviews} />
-      <FounderSection />
-      <HomeSEOContent />
-    </div>
+        </section>
+        <HomeSEOContent />
+      </div>
+    </>
   );
 }
