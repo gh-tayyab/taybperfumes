@@ -111,31 +111,6 @@ export default function ProductClient({
   const handleAddToCart = () => {
     addToCart(product);
 
-    if (typeof window !== "undefined") {
-      window.dataLayer = window.dataLayer || [];
-
-      window.dataLayer.push({
-        event: "add_to_cart",
-
-        ecommerce: {
-          currency: "PKR",
-
-          value: product.price,
-
-          items: [
-            {
-              item_id: product.sku,
-              item_name: product.name,
-              item_brand: product.brand,
-              item_category: product.category,
-              quantity: 1,
-              price: product.price,
-            },
-          ],
-        },
-      });
-    }
-
     setAdded(true);
 
     setTimeout(() => {
