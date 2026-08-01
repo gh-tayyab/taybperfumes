@@ -17,9 +17,23 @@ export default function HomeSEOContent() {
           <p className="font-body text-cream/60 max-w-3xl mx-auto leading-8">
             TAYB Perfumes brings together premium ingredients, elegant fragrance
             profiles and exceptional longevity to create luxury perfumes for men
-            and women in Pakistan. Whether you're looking for your everyday
-            signature scent or something unforgettable for special occasions,
-            our collection is designed to leave a lasting impression.
+            and women in Pakistan. Explore our{" "}
+            <Link href="/men" className="text-gold hover:underline">
+              Men's Collection
+            </Link>
+            ,{" "}
+            <Link href="/women" className="text-gold hover:underline">
+              Women's Collection
+            </Link>{" "}
+            or discover our{" "}
+            <Link href="/bundles" className="text-gold hover:underline">
+              Perfume Bundles
+            </Link>
+            . You can also read fragrance tips and buying guides on our{" "}
+            <Link href="/blogs" className="text-gold hover:underline">
+              Perfume Blog
+            </Link>
+            .
           </p>
         </div>
 
@@ -73,9 +87,15 @@ export default function HomeSEOContent() {
               Finding premium luxury perfumes in Pakistan should be simple. TAYB
               Perfumes offers carefully curated fragrances inspired by
               internationally loved scent profiles while maintaining excellent
-              quality and long-lasting performance. Our perfumes are suitable
-              for everyday wear, formal events, office environments and special
-              occasions.
+              quality and long-lasting performance. Browse our{" "}
+              <Link href="/men" className="text-gold hover:underline">
+                luxury perfumes for men
+              </Link>{" "}
+              and{" "}
+              <Link href="/women" className="text-gold hover:underline">
+                luxury perfumes for women
+              </Link>{" "}
+              to find your perfect signature fragrance.
             </p>
           </div>
 
@@ -101,60 +121,63 @@ export default function HomeSEOContent() {
             <p className="font-body text-cream/60 leading-8">
               Whether you prefer woody, fresh, floral, musky or oriental
               fragrances, our collection includes carefully selected perfumes
-              for both men and women. Every fragrance is created to complement
-              different personalities and lifestyles while delivering a luxury
-              experience at an accessible price.
+              for both men and women. Looking for better fragrance advice? Visit
+              our{" "}
+              <Link href="/blogs" className="text-gold hover:underline">
+                perfume guides and fragrance tips
+              </Link>{" "}
+              to learn how to choose, wear and store your perfumes correctly.
             </p>
           </div>
         </div>
 
         {/* Homepage FAQ */}
         <div>
-  <div className="flex items-end justify-between mb-10">
-    <div>
-      <p className="text-gold text-xs tracking-[0.3em] uppercase mb-3">
-        Frequently Asked Questions
-      </p>
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-gold text-xs tracking-[0.3em] uppercase mb-3">
+                Frequently Asked Questions
+              </p>
 
-      <h2 className="font-display text-4xl text-cream">
-        Quick Answers
-      </h2>
-    </div>
+              <h2 className="font-display text-4xl text-cream">
+                Quick Answers
+              </h2>
+            </div>
 
-    <Link
-      href="/faq"
-      className="hidden md:inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-cream/50 hover:text-gold transition-colors"
-    >
-      View All FAQs →
-    </Link>
-  </div>
+            <Link
+              href="/faq"
+              className="hidden md:inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-cream/50 hover:text-gold transition-colors"
+            >
+              View All FAQs →
+            </Link>
+          </div>
 
-  <div className="space-y-8">
-    {faqs.slice(0, 3).map((faq, index) => (
-      <div
-        key={index}
-        className={index !== 2 ? "border-b border-gold/10 pb-6" : "pb-2"}
-      >
-        <h3 className="font-display text-2xl text-cream mb-3">
-          {faq.q}
-        </h3>
+          <div className="space-y-8">
+            {faqs.slice(0, 3).map((faq, index) => (
+              <div
+                key={index}
+                className={
+                  index !== 2 ? "border-b border-gold/10 pb-6" : "pb-2"
+                }
+              >
+                <h3 className="font-display text-2xl text-cream mb-3">
+                  {faq.q}
+                </h3>
 
-        <p className="font-body text-cream/60 leading-7">
-          {faq.a}
-        </p>
-      </div>
-    ))}
+                <p className="font-body text-cream/60 leading-7">{faq.a}</p>
+              </div>
+            ))}
 
-    <div className="md:hidden pt-2">
-      <Link
-        href="/faq"
-        className="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-gold"
-      >
-        View All FAQs →
-      </Link>
-    </div>
-  </div>
-</div>
+            <div className="md:hidden pt-2">
+              <Link
+                href="/faq"
+                className="inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-gold"
+              >
+                View All FAQs →
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

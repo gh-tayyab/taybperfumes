@@ -10,23 +10,39 @@ export const blogsQuery = groq`
   mainImage,
   "image": mainImage.asset->url,
   "category": category->title,
-  "author": author->name
+  author->{
+  name,
+
+  "image": image.asset->url
+}
 }
 `;
 
 export const blogQuery = groq`
-*[_type=="blog" && slug.current == $slug][0]{
+*[_type=="blog" && slug.current==$slug][0]{
+
   _id,
   title,
   slug,
   excerpt,
   body,
   publishedAt,
+
   metaTitle,
   metaDescription,
+
   "image": mainImage.asset->url,
+
   "category": category->title,
-  "author": author->name
+
+  "productCategory": productCategory,
+
+  author->{
+  name,
+  slug,
+  bio,
+  "image": image.asset->url
+}
 }
 `;
 
@@ -107,6 +123,49 @@ export const featuredBlogsQuery = groq`
   excerpt,
 
   publishedAt,
+
+  "image": mainImage.asset->url
+}
+`;
+
+
+export const featuredProductsQuery = `
+*[_type=="blog"][0]{
+  "products": *[
+    _type=="product"
+  ]
+}
+`;
+
+export const readNextBlogsQuery = groq`
+*[
+  _type=="blog" &&
+  productCategory == $productCategory &&
+  slug.current != $slug
+]
+| order(publishedAt desc)[0...3]{
+
+  _id,
+  title,
+  slug,
+  excerpt,
+
+  "image": mainImage.asset->url
+}
+`;
+
+
+export const categoryBlogsQuery = groq`
+*[
+  _type=="blog" &&
+  productCategory == $category
+]
+| order(publishedAt desc)[0...3]{
+
+  _id,
+  title,
+  slug,
+  excerpt,
 
   "image": mainImage.asset->url
 }
