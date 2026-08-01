@@ -23,6 +23,9 @@ export interface Product {
   badge?: string;
   discount?: number;
   inStock: boolean;
+  quality: "Luxury" | "Regular";
+  bestSeller: boolean;
+  longevity: number;
 }
 
 export const products: Product[] = [
@@ -44,12 +47,13 @@ export const products: Product[] = [
     description: "A bold, enduring woody amber for the modern man.",
     longDescription:
       "Laceda is a statement of confidence — a deep, resonant woody amber that opens with the fresh brightness of bergamot and settles into a rich, lasting base of sandalwood and amber. Crafted for those who leave an impression long after they've left the room.",
-    image:
-      "/perfume.png",
-    hoverImage:
-      "/botel.jpg",
+    image: "/perfume.png",
+    hoverImage: "/botel.jpg",
     badge: "New",
     inStock: true,
+    quality: "Luxury",
+    bestSeller: true,
+    longevity: 9,
   },
   {
     id: "2",
@@ -69,12 +73,13 @@ export const products: Product[] = [
     description: "Delicate florals kissed by soft musk — endlessly feminine.",
     longDescription:
       "Angelica captures the essence of bloom — a graceful interplay of white florals and warm musk. Jasmine and rose unfurl at the top, while lily and iris bloom at the heart. A whisper of vanilla and white musk grounds this ethereal fragrance in something deeply sensual.",
-    image:
-      "/women/50ml.png",
-    hoverImage:
-      "/women/botel50ml.png",
+    image: "/women/50ml.png",
+    hoverImage: "/women/botel50ml.png",
     badge: "New",
     inStock: true,
+    quality: "Luxury",
+    bestSeller: true,
+    longevity: 10,
   },
   {
     id: "3",
@@ -94,11 +99,12 @@ export const products: Product[] = [
     description: "The signature Laceda in a pocket-sized travel spray.",
     longDescription:
       "All the presence of Laceda in a convenient 10ml travel size. Perfect for those who want to carry their signature scent wherever the day takes them.",
-    image:
-      "/perfume.png",
-    hoverImage:
-      "/botel.jpg",
+    image: "/perfume.png",
+    hoverImage: "/botel.jpg",
     inStock: true,
+    quality: "Luxury",
+    bestSeller: true,
+    longevity: 9,
   },
   {
     id: "4",
@@ -118,11 +124,12 @@ export const products: Product[] = [
     description: "The full expression of Laceda for daily indulgence.",
     longDescription:
       "For those who've made Laceda their signature — the 100ml bottle ensures you'll never run out of the scent that defines you.",
-    image:
-      "/perfume.png",
-    hoverImage:
-      "/botel.jpg",
+    image: "/perfume.png",
+    hoverImage: "/botel.jpg",
     inStock: true,
+    quality: "Luxury",
+    bestSeller: true,
+    longevity: 9,
   },
   {
     id: "5",
@@ -142,11 +149,12 @@ export const products: Product[] = [
     description: "Angelica in a sleek travel-ready format.",
     longDescription:
       "Carry the delicate magic of Angelica in your pocket. The 10ml travel size is perfect for touch-ups and on-the-go elegance.",
-    image:
-      "/women/50ml.png",
-    hoverImage:
-      "/women/botel50ml.png",
+    image: "/women/50ml.png",
+    hoverImage: "/women/botel50ml.png",
     inStock: true,
+    quality: "Luxury",
+    bestSeller: true,
+    longevity: 9,
   },
   {
     id: "6",
@@ -166,11 +174,12 @@ export const products: Product[] = [
     description: "Angelica's full bloom — the ultimate expression.",
     longDescription:
       "Angelica in its full splendour. The 100ml bottle is for those who've found their signature and want to wear it every single day.",
-    image:
-      "/women/50ml.png",
-    hoverImage:
-      "/women/botel50ml.png",
+    image: "/women/50ml.png",
+    hoverImage: "/women/botel50ml.png",
     inStock: true,
+    quality: "Luxury",
+    bestSeller: true,
+    longevity: 9,
   },
   {
     id: "7",
@@ -192,12 +201,13 @@ export const products: Product[] = [
     description: "Both signatures together — one for every mood.",
     longDescription:
       "The ultimate TAYB duo. Laceda's commanding woods paired with Angelica's ethereal florals. A complete fragrance wardrobe in one elegant box. Save 10% when you choose both.",
-    image:
-      "/bundles.png",
-    hoverImage:
-      "/botel.jpg",
+    image: "/bundles.png",
+    hoverImage: "/botel.jpg",
     badge: "Save 10%",
     inStock: true,
+    quality: "Luxury",
+    bestSeller: true,
+    longevity: 9,
   },
   {
     id: "8",
@@ -219,12 +229,13 @@ export const products: Product[] = [
     description: "Try both — the perfect starter bundle.",
     longDescription:
       "New to TAYB? Start with both. The 10ml bundle lets you explore our two signature scents and discover which one (or both) belong in your daily ritual.",
-    image:
-      "/bundleperfume.png",
-    hoverImage:
-      "/botel.jpg",
+    image: "/bundleperfume.png",
+    hoverImage: "/botel.jpg",
     badge: "Save 10%",
     inStock: true,
+    quality: "Luxury",
+    bestSeller: true,
+    longevity: 9,
   },
   {
     id: "9",
@@ -245,12 +256,13 @@ export const products: Product[] = [
     description: "The complete TAYB experience — a gift they'll never forget.",
     longDescription:
       "Our luxury gift set brings together Angelica 50ml, Laceda 50ml, and two travel-size 10ml companions in a beautifully crafted gift box. The ultimate expression of thoughtful gifting.",
-      image:
-      "/bundleperfume.png",
-    hoverImage:
-      "/botel.jpg",
+    image: "/bundleperfume.png",
+    hoverImage: "/botel.jpg",
     badge: "Best Gift",
     inStock: true,
+    quality: "Luxury",
+    bestSeller: true,
+    longevity: 9,
   },
 ];
 

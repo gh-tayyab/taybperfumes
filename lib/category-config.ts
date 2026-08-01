@@ -15,8 +15,7 @@ export const categoryPages: CategoryConfig[] = [
 
     h1: "Long Lasting Perfumes",
 
-    title:
-      "Long Lasting Perfumes in Pakistan | TAYB Perfumes",
+    title: "Long Lasting Perfumes in Pakistan | TAYB Perfumes",
 
     description:
       "Discover premium long lasting perfumes in Pakistan. Shop luxury fragrances for men and women with exceptional longevity and nationwide delivery.",
@@ -28,7 +27,7 @@ export const categoryPages: CategoryConfig[] = [
       "TAYB Perfumes",
     ],
 
-    filter: (product) => product.inStock,
+    filter: (product) => product.longevity >= 8,
   },
 
   {
@@ -36,8 +35,7 @@ export const categoryPages: CategoryConfig[] = [
 
     h1: "Luxury Perfumes",
 
-    title:
-      "Luxury Perfumes Pakistan | TAYB Perfumes",
+    title: "Luxury Perfumes Pakistan | TAYB Perfumes",
 
     description:
       "Explore luxury perfumes for men and women by TAYB Perfumes. Premium fragrances inspired by world-famous scents.",
@@ -48,7 +46,7 @@ export const categoryPages: CategoryConfig[] = [
       "Designer Inspired Perfumes",
     ],
 
-    filter: (product) => product.inStock,
+    filter: (product) => product.quality === "Luxury",
   },
 
   {
@@ -56,8 +54,7 @@ export const categoryPages: CategoryConfig[] = [
 
     h1: "Best Selling Perfumes",
 
-    title:
-      "Best Selling Perfumes | TAYB Perfumes",
+    title: "Best Selling Perfumes | TAYB Perfumes",
 
     description:
       "Shop our most loved perfumes chosen by customers across Pakistan.",
@@ -67,6 +64,6 @@ export const categoryPages: CategoryConfig[] = [
       "Popular Perfumes Pakistan",
     ],
 
-    filter: (product) => product.inStock,
+    filter: (product) => product.bestSeller,
   },
 ];
